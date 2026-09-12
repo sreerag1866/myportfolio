@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Shop — Custom Branded Merch | Sreerag Ayyappath</title>
+<meta name="description" content="Upload your logo and place it on a t-shirt, mug, tote bag or gift set. Preview live, then order directly on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#2451FF; --accent-ink:#0f2ea8; --signal:#FF4B2B; --violet:#8B5CF6; --teal:#17C3B2; --gold:#FFC53D;
+  --radius:2px; --maxw:1240px;
+}
+html[data-theme="dark"]{
+  --bg:#14161A; --bg-raised:#1B1E24; --ink:#EDEBE3; --ink-dim:#9A9C9C; --line:#33363D;
+  --shadow:0 24px 60px rgba(0,0,0,.5); --stage-bg:#0f1114;
+}
+html[data-theme="light"]{
+  --bg:#F2EFE7; --bg-raised:#FFFFFF; --ink:#181812; --ink-dim:#6B6A5F; --line:#D8D3C4;
+  --shadow:0 20px 50px rgba(30,25,10,.14); --stage-bg:#e9e4d4;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;margin:0;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+.section{padding:88px 0;border-bottom:1px solid var(--line);position:relative;z-index:1;}
+.section-num{font-family:'Space Grotesk';font-size:13px;color:var(--accent);letter-spacing:.08em;}
+.section-title{font-size:clamp(26px,4vw,42px);line-height:1.08;margin-top:8px;}
+.muted{color:var(--ink-dim);}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important;transition-duration:.001ms !important;} }
+
+#bgCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block;}
+
+/* NAV */
+header.nav{position:fixed;top:0;left:0;right:0;z-index:60;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brandmark{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:600;font-size:15px;}
+.brandmark .box{width:30px;height:30px;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:12px;}
+.navlinks{display:flex;gap:24px;align-items:center;}
+.navlinks a{font-size:14px;color:var(--ink-dim);}
+.navlinks a:hover, .navlinks a.current{color:var(--ink);}
+.navlinks a.cta{color:#fff;background:var(--accent);padding:9px 16px;border-radius:var(--radius);font-weight:500;}
+.theme-toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:20px;padding:4px 6px;background:var(--bg-raised);}
+.theme-toggle button{border:0;background:transparent;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-dim);}
+.theme-toggle button[aria-pressed="true"]{background:var(--accent);color:#fff;}
+.theme-toggle svg{width:14px;height:14px;}
+.navburger{display:none;border:0;background:transparent;color:var(--ink);}
+.navtools{display:flex;align-items:center;gap:14px;}
+@media (max-width:900px){
+  .navlinks{position:fixed;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;align-items:stretch;padding:18px 28px;gap:16px;border-bottom:1px solid var(--line);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+  .navlinks.open{opacity:1;transform:translateY(0);pointer-events:auto;}
+  .navburger{display:block;}
+}
+
+/* HERO */
+.hero{padding:150px 0 70px;}
+.eyebrow-line{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-dim);margin-bottom:18px;}
+.eyebrow-line .dot{width:7px;height:7px;border-radius:50%;background:var(--signal);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero h1{font-size:clamp(36px,6vw,66px);line-height:1.03;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero p.lead{margin-top:18px;max-width:560px;color:var(--ink-dim);font-size:17px;}
+.hero-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:var(--radius);font-weight:500;font-size:15px;border:1px solid var(--ink);}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent-ink);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;}
+.btn-ghost:hover{background:var(--bg-raised);}
+
+/* CONFIGURATOR */
+.configurator{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start;}
+@media (max-width:960px){ .configurator{grid-template-columns:1fr;} }
+
+.product-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
+.ptab{border:1px solid var(--line);background:var(--bg-raised);color:var(--ink-dim);padding:10px 16px;border-radius:20px;font-size:13.5px;font-weight:500;display:flex;align-items:center;gap:8px;}
+.ptab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.ptab svg{width:16px;height:16px;}
+
+.config-panel{background:var(--bg-raised);border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
+.field{margin-bottom:20px;}
+.field label{display:block;font-size:12.5px;letter-spacing:.04em;color:var(--ink-dim);margin-bottom:9px;}
+.swatches{display:flex;gap:10px;flex-wrap:wrap;}
+.swatch{width:32px;height:32px;border-radius:50%;border:2px solid var(--line);cursor:pointer;}
+.swatch.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--bg-raised), 0 0 0 4px var(--accent);}
+.sizes{display:flex;gap:8px;flex-wrap:wrap;}
+.size-btn{border:1px solid var(--line);background:transparent;color:var(--ink);width:42px;height:36px;border-radius:var(--radius);font-size:13px;font-weight:600;}
+.size-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.qty-row{display:flex;align-items:center;gap:12px;}
+.qty-btn{width:34px;height:34px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:var(--radius);font-size:16px;}
+.qty-row input{width:56px;text-align:center;background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:8px 4px;border-radius:var(--radius);font-family:inherit;font-size:14.5px;}
+.upload-zone{border:1.5px dashed var(--line);border-radius:var(--radius);padding:22px;text-align:center;cursor:pointer;background:var(--bg);}
+.upload-zone:hover{border-color:var(--accent);}
+.upload-zone svg{width:26px;height:26px;color:var(--ink-dim);margin-bottom:8px;}
+.upload-zone p{margin:0;font-size:13.5px;color:var(--ink-dim);}
+.upload-zone input{display:none;}
+.upload-status{margin-top:8px;font-size:12.5px;color:var(--accent);display:none;}
+.slider-row{display:flex;align-items:center;gap:12px;}
+.slider-row input[type="range"]{flex:1;accent-color:var(--accent);}
+.slider-row span{width:38px;font-size:12px;color:var(--ink-dim);text-align:right;}
+.field input[type="text"], .field textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);
+  padding:11px 13px;border-radius:var(--radius);font-family:inherit;font-size:14.5px;
+}
+.field textarea{min-height:80px;resize:vertical;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-note{font-size:12.5px;color:var(--ink-dim);margin-top:10px;}
+#sentMsg{display:none;margin-top:14px;padding:12px 14px;border:1px solid var(--accent);color:var(--accent);font-size:13.5px;border-radius:var(--radius);}
+
+/* STAGE (live preview) */
+.stage-outer{position:sticky;top:100px;}
+.mockup-stage{
+  position:relative;background:var(--stage-bg);border:1px solid var(--line);border-radius:var(--radius);
+  aspect-ratio:400/460;overflow:hidden;box-shadow:var(--shadow);
+}
+.mockup-layer{position:absolute;inset:0;display:none;}
+.mockup-layer.active{display:block;}
+.mockup-layer svg{width:100%;height:100%;}
+#logoWrap{position:absolute;pointer-events:none;display:flex;align-items:center;justify-content:center;}
+#logoWrap img{max-width:100%;max-height:100%;object-fit:contain;}
+.stage-caption{margin-top:14px;font-size:12.5px;color:var(--ink-dim);text-align:center;}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.step{border:1px solid var(--line);padding:22px;border-radius:var(--radius);background:var(--bg-raised);}
+.step .n{font-family:'Space Grotesk';font-size:13px;color:var(--accent);margin-bottom:10px;}
+.step h3{font-size:16px;margin-bottom:8px;}
+.step p{font-size:13.5px;color:var(--ink-dim);margin:0;}
+@media (max-width:860px){ .steps{grid-template-columns:1fr 1fr;} }
+@media (max-width:520px){ .steps{grid-template-columns:1fr;} }
+
+/* GIFT SET STRIP */
+.giftbanner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--bg-raised);border:1px solid var(--line);padding:26px 30px;border-radius:var(--radius);}
+.giftbanner h3{font-size:19px;}
+.giftbanner p{margin:6px 0 0;color:var(--ink-dim);font-size:14px;max-width:460px;}
+
+.gift-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.gift-card{background:var(--bg-raised);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+.gift-card img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.gift-body{padding:14px 16px 18px;}
+.gift-body h3{font-size:15px;}
+.gift-body p{font-size:12.5px;color:var(--ink-dim);margin:6px 0 0;}
+@media (max-width:960px){ .gift-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){ .gift-grid{grid-template-columns:1fr;} }
+
+footer{padding:34px 0;position:relative;z-index:1;}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-dim);}
+
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:70;display:flex;align-items:center;gap:10px;background:#22c55e;color:#fff;padding:14px 18px;border-radius:32px;box-shadow:0 12px 30px rgba(0,0,0,.3);font-weight:500;font-size:14px;}
+.wa-float .ping{position:absolute;top:-3px;right:-3px;width:12px;height:12px;background:#22c55e;border-radius:50%;}
+.wa-float .ping::after{content:'';position:absolute;inset:0;border-radius:50%;background:#22c55e;animation:ping 1.8s infinite;}
+@keyframes ping{0%{transform:scale(1);opacity:.7;}100%{transform:scale(2.4);opacity:0;}}
+.wa-float:hover{background:#1ea952;}
+@media (max-width:560px){ .wa-float span.label{display:none;} .wa-float{padding:14px;} }
+</style>
+</head>
+<body>
+<canvas id="bgCanvas" aria-hidden="true"></canvas>
+<svg style="position:absolute;width:0;height:0;" aria-hidden="true">
+<defs>
+  <radialGradient id="sheenGrad" cx="28%" cy="18%" r="80%">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+    <stop offset="55%" stop-color="#ffffff" stop-opacity="0.1"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadeGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="50%" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.32"/>
+  </linearGradient>
+  <radialGradient id="groundShadow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#000000" stop-opacity="0.35"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+  </radialGradient>
+  <clipPath id="clipTshirt"><path d="M130 40 L98 66 L38 108 L70 178 L112 152 L112 422 L288 422 L288 152 L330 178 L362 108 L302 66 L270 40 Q262 74 200 74 Q138 74 130 40 Z"/></clipPath>
+  <clipPath id="clipMug"><path d="M90,110 L280,110 L280,370 L90,370 Z"/></clipPath>
+  <clipPath id="clipBag"><path d="M70,150 L330,150 L308,430 L92,430 Z"/></clipPath>
+  <clipPath id="clipGift"><path d="M70,200 L330,200 L330,410 L70,410 Z M50,160 L350,160 L350,210 L50,210 Z"/></clipPath>
+</defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a href="index.html" class="brandmark"><span class="box">SA</span> SREERAG AYYAPPATH</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="index.html">Portfolio</a>
+      <a href="shop.html">Art Shop</a>
+      <a href="print-shop.html" class="current">Print Shop</a>
+      <a href="#configure" class="cta">Start designing</a>
+    </nav>
+    <div class="navtools">
+      <div class="theme-toggle" role="group" aria-label="Theme switch">
+        <button id="btnLight" aria-pressed="false" aria-label="Light theme" title="Light">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button id="btnDark" aria-pressed="true" aria-label="Dark theme" title="Dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg>
+        </button>
+      </div>
+      <button class="navburger" id="burger" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow-line"><span class="dot"></span> Custom branded merch — printed to order</div>
+    <h1>Put your brand on<br><em>real things.</em></h1>
+    <p class="lead">Upload your logo, drop it onto a t-shirt, mug, tote bag or gift set, and send the order straight to WhatsApp — no account, no cart, no waiting on a quote.</p>
+    <div class="hero-actions">
+      <a href="#configure" class="btn btn-primary">Start designing</a>
+      <a href="#how" class="btn btn-ghost">How it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="configure">
+  <div class="wrap">
+    <div class="section-num">01 — DESIGN YOUR MERCH</div>
+    <h2 class="section-title" style="margin-bottom:30px;">Upload, place, preview</h2>
+
+    <div class="configurator">
+      <div class="config-panel">
+        <div class="product-tabs" id="productTabs">
+          <button class="ptab active" data-product="tshirt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3L3 7l3 4 2-1.5V21h8V9.5L18 11l3-4-5-4-2 2h-4L8 3Z"/></svg>
+            T-Shirt
+          </button>
+          <button class="ptab" data-product="mug">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h11v13a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4Z"/><path d="M15 7h2a3 3 0 0 1 0 6h-2"/></svg>
+            Mug
+          </button>
+          <button class="ptab" data-product="bag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8h12l-1 13H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            Tote Bag
+          </button>
+          <button class="ptab" data-product="giftset">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="9" width="18" height="12"/><path d="M3 9h18M12 9v12M12 9c-2-4-6-4-6 0M12 9c2-4 6-4 6 0"/></svg>
+            Gift Set
+          </button>
+        </div>
+
+        <div class="field">
+          <label>Colour</label>
+          <div class="swatches" id="colorSwatches"></div>
+        </div>
+
+        <div class="field" id="sizeField">
+          <label>Size</label>
+          <div class="sizes" id="sizeButtons"></div>
+        </div>
+
+        <div class="field">
+          <label>Quantity</label>
+          <div class="qty-row">
+            <button class="qty-btn" id="qtyMinus" type="button">−</button>
+            <input type="number" id="qtyInput" value="1" min="1">
+            <button class="qty-btn" id="qtyPlus" type="button">+</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Your logo / artwork</label>
+          <div class="upload-zone" id="uploadZone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+            <p>Click to upload — PNG or JPG, transparent background works best</p>
+            <input type="file" id="fileInput" accept="image/*">
+          </div>
+          <div class="upload-status" id="uploadStatus">Logo loaded — use the sliders below to place it.</div>
+        </div>
+
+        <div class="field">
+          <label>Logo size</label>
+          <div class="slider-row"><input type="range" id="scaleSlider" min="20" max="150" value="70"><span id="scaleVal">70%</span></div>
+        </div>
+        <div class="field">
+          <label>Horizontal position</label>
+          <div class="slider-row"><input type="range" id="posXSlider" min="-40" max="40" value="0"><span id="posXVal">0</span></div>
+        </div>
+        <div class="field">
+          <label>Vertical position</label>
+          <div class="slider-row"><input type="range" id="posYSlider" min="-40" max="40" value="0"><span id="posYVal">0</span></div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="custName">Your name</label>
+            <input id="custName" type="text" placeholder="Full name">
+          </div>
+          <div class="field">
+            <label for="custContact">WhatsApp / email</label>
+            <input id="custContact" type="text" placeholder="+971...">
+          </div>
+        </div>
+        <div class="field">
+          <label for="custNotes">Notes (placement, deadline, anything else)</label>
+          <textarea id="custNotes" placeholder="e.g. logo on the back instead, need it by Friday..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="sendOrder" style="width:100%;justify-content:center;">Send order via WhatsApp</button>
+        <div id="sentMsg">Opening WhatsApp — attach your logo file in the chat so we have the original artwork.</div>
+        <p class="form-note">This preview is for placement reference — your original file is what actually gets printed. Nothing is uploaded to a server; attach it directly in WhatsApp.</p>
+      </div>
+
+      <div class="stage-outer">
+        <div class="mockup-stage" id="stage">
+          <div class="mockup-layer active" data-product="tshirt">
+            <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="200" cy="432" rx="130" ry="18" fill="url(#groundShadow)"/>
+              <path d="M130 40 L98 66 L38 108 L70 178 L112 152 L112 422 L288 422 L288 152 L330 178 L362 108 L302 66 L270 40 Q262 74 200 74 Q138 74 130 40 Z" fill="currentColor" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#sheenGrad)" clip-path="url(#clipTshirt)"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#shadeGrad)" clip-path="url(#clipTshirt)"/>
+            </svg>
+          </div>
+          <div class="mockup-layer" data-product="mug">
+            <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="185" cy="392" rx="120" ry="16" fill="url(#groundShadow)"/>
+              <rect x="90" y="110" width="190" height="260" rx="18" fill="currentColor" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+              <path d="M280,150 C355,150 355,300 280,320" fill="none" stroke="currentColor" stroke-width="22" stroke-linecap="round"/>
+              <path d="M280,150 C355,150 355,300 280,320" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#sheenGrad)" clip-path="url(#clipMug)"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#shadeGrad)" clip-path="url(#clipMug)"/>
+              <ellipse cx="185" cy="112" rx="95" ry="14" fill="rgba(0,0,0,.12)"/>
+            </svg>
+          </div>
+          <div class="mockup-layer" data-product="bag">
+            <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="200" cy="442" rx="120" ry="16" fill="url(#groundShadow)"/>
+              <path d="M150,160 C150,90 250,90 250,160" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+              <path d="M70,150 L330,150 L308,430 L92,430 Z" fill="currentColor" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#sheenGrad)" clip-path="url(#clipBag)"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#shadeGrad)" clip-path="url(#clipBag)"/>
+            </svg>
+          </div>
+          <div class="mockup-layer" data-product="giftset">
+            <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="200" cy="424" rx="130" ry="16" fill="url(#groundShadow)"/>
+              <rect x="70" y="200" width="260" height="210" fill="currentColor" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+              <rect x="50" y="160" width="300" height="50" fill="currentColor" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#sheenGrad)" clip-path="url(#clipGift)"/>
+              <rect x="0" y="0" width="400" height="460" fill="url(#shadeGrad)" clip-path="url(#clipGift)"/>
+              <rect x="185" y="160" width="30" height="250" fill="var(--accent)"/>
+              <rect x="50" y="178" width="300" height="18" fill="var(--accent)"/>
+              <circle cx="185" cy="150" r="18" fill="var(--accent)"/>
+              <circle cx="215" cy="150" r="18" fill="var(--accent)"/>
+            </svg>
+          </div>
+          <div id="logoWrap"><img id="logoImg" alt="Your uploaded logo placed on the product"></div>
+        </div>
+        <p class="stage-caption">Live placement preview — actual print quality depends on your uploaded file.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="corporate">
+  <div class="wrap">
+    <div class="section-num">02 — CORPORATE GIFTS</div>
+    <h2 class="section-title" style="margin-bottom:14px;">Real sets we've produced</h2>
+    <p class="muted" style="max-width:520px;margin-bottom:32px;">These are actual corporate gifting jobs — notebooks, bottles, pens and apparel, branded and boxed. Send your logo and we'll put together a set like this for your team or event.</p>
+
+    <div class="gift-grid">
+      <div class="gift-card">
+        <img src="assets/promo-giftsets.jpg" alt="Branded notebook, bottle and pen gift set">
+        <div class="gift-body"><h3>Notebook &amp; Pen Sets</h3><p>Branded notebooks paired with pens and bottles, boxed for presentation.</p></div>
+      </div>
+      <div class="gift-card">
+        <img src="assets/promo-polos.jpg" alt="Branded polo shirts in three colours">
+        <div class="gift-body"><h3>Uniform &amp; Apparel</h3><p>Colour-coded polos and staff wear, branded across business lines.</p></div>
+      </div>
+      <div class="gift-card">
+        <img src="assets/promo-mug.jpg" alt="Branded anniversary mug">
+        <div class="gift-body"><h3>Mugs &amp; Drinkware</h3><p>Anniversary and event mugs, individually branded.</p></div>
+      </div>
+      <div class="gift-card">
+        <img src="assets/promo-umbrellas.jpg" alt="Branded promotional umbrellas">
+        <div class="gift-body"><h3>Promotional Merchandise</h3><p>Umbrellas, bags and forecourt giveaways branded to spec.</p></div>
+      </div>
+    </div>
+
+    <div class="config-panel" style="margin-top:36px;max-width:640px;">
+      <h3 style="font-size:18px;margin-bottom:6px;">Enquire about a corporate gift set</h3>
+      <p class="muted" style="font-size:13.5px;margin:0 0 20px;">Upload your logo, tell us what you need, and we'll reply with options on WhatsApp.</p>
+      <div class="field">
+        <label>Your logo / artwork</label>
+        <div class="upload-zone" id="giftUploadZone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          <p>Click to upload your logo</p>
+          <input type="file" id="giftFileInput" accept="image/*">
+        </div>
+        <div class="upload-status" id="giftUploadStatus">Logo attached — mention it in the message below.</div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="giftName">Your name</label><input id="giftName" type="text" placeholder="Full name"></div>
+        <div class="field"><label for="giftContact">WhatsApp / email</label><input id="giftContact" type="text" placeholder="+971..."></div>
+      </div>
+      <div class="field">
+        <label for="giftNotes">What do you need?</label>
+        <textarea id="giftNotes" placeholder="e.g. 50 gift sets with mug + notebook + pen, our logo in navy..."></textarea>
+      </div>
+      <button class="btn btn-primary" id="giftSend" style="width:100%;justify-content:center;">Send enquiry via WhatsApp</button>
+      <div id="giftSentMsg" style="display:none;margin-top:14px;padding:12px 14px;border:1px solid var(--accent);color:var(--accent);font-size:13.5px;border-radius:var(--radius);">Opening WhatsApp — attach your logo file in the chat.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-num">03 — HOW IT WORKS</div>
+    <h2 class="section-title" style="margin-bottom:32px;">From upload to delivery</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Upload your logo</h3><p>Drop in your artwork and pick the product — t-shirt, mug, bag or gift set.</p></div>
+      <div class="step"><div class="n">02</div><h3>Place &amp; preview</h3><p>Scale and position it live so you know roughly how it'll sit before ordering.</p></div>
+      <div class="step"><div class="n">03</div><h3>Confirm on WhatsApp</h3><p>Send the order — attach your original file and we'll confirm print size and price.</p></div>
+      <div class="step"><div class="n">04</div><h3>Printed &amp; delivered</h3><p>Produced locally in Dubai, picked up or shipped to your door.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:0;">
+  <div class="wrap">
+    <div class="giftbanner">
+      <div>
+        <h3>Building a gift set?</h3>
+        <p>Mug + tote bag + tee, all with the same logo — great for corporate gifting, team swag or event giveaways. Mention it in your notes and we'll bundle the pricing.</p>
+      </div>
+      <a class="btn btn-primary" href="https://wa.me/971588338975?text=Hi%20Sreerag%2C%20I%27d%20like%20a%20bundled%20gift%20set%20with%20our%20logo%20on%20a%20mug%2C%20tote%20bag%20and%20t-shirt." target="_blank" rel="noopener">Ask about bundles</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© <span id="year"></span> Sreerag Ayyappath — Print Shop</span>
+    <span style="display:flex;gap:18px;">
+      <a href="index.html">Portfolio</a>
+      <a href="shop.html">Art Shop</a>
+    </span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/971588338975?text=Hi%20Sreerag%2C%20I%27d%20like%20to%20print%20our%20logo%20on%20some%20merchandise." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A9 9 0 0 0 3 17.7L2 22l4.4-1.1A9 9 0 1 0 17.6 6.3ZM12 20a8 8 0 0 1-4-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-1.3-.6-2.2-1.5-2.8-2.6-.1-.2-.1-.4.1-.5l.6-.7c.1-.2.1-.4 0-.6l-.7-1.6c-.1-.3-.4-.3-.6-.3h-.5c-.2 0-.5.1-.6.3-.2.3-.7 1-.7 2s.6 2.1 1.4 3c1 1.2 2.2 2 3.7 2.5 1.6.5 1.6.4 1.9.3.3-.1 1.1-.5 1.3-1 .2-.4.2-.8.1-.9-.1-.1-.2-.2-.4-.2Z"/></svg>
+  <span class="ping"></span>
+  <span class="label">Chat on WhatsApp</span>
+</a>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* THEME */
+const root = document.documentElement;
+const btnLight = document.getElementById('btnLight');
+const btnDark = document.getElementById('btnDark');
+function setTheme(t){
+  root.setAttribute('data-theme', t);
+  btnLight.setAttribute('aria-pressed', t === 'light');
+  btnDark.setAttribute('aria-pressed', t === 'dark');
+  try{ localStorage.setItem('sa-shop-theme', t); }catch(e){}
+}
+let savedTheme = 'dark';
+try{ savedTheme = localStorage.getItem('sa-shop-theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark'); }catch(e){}
+setTheme(savedTheme);
+btnLight.addEventListener('click', ()=>setTheme('light'));
+btnDark.addEventListener('click', ()=>setTheme('dark'));
+
+/* MOBILE NAV */
+document.getElementById('burger').addEventListener('click', ()=>{
+  document.getElementById('navlinks').classList.toggle('open');
+});
+
+/* GENERATIVE BACKGROUND */
+(function(){
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  let w, h, raf;
+  const palette = ['#2451FF', '#FF4B2B', '#8B5CF6', '#17C3B2', '#FFC53D', '#FF3D9A'];
+  const blobs = palette.map((color, i) => ({
+    color, baseR: 0.28 + i * 0.04,
+    ax: 0.20 + Math.random()*0.15, ay: 0.18 + Math.random()*0.15,
+    px: Math.random()*Math.PI*2, py: Math.random()*Math.PI*2,
+    sx: 0.05 + Math.random()*0.04, sy: 0.05 + Math.random()*0.04,
+    ox: 0.25 + Math.random()*0.5, oy: 0.25 + Math.random()*0.5
+  }));
+  function resize(){
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    canvas.style.width = w+'px'; canvas.style.height = h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  function hexToRgba(hex,a){
+    const n = parseInt(hex.slice(1),16);
+    return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+  }
+  function draw(t){
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    ctx.clearRect(0,0,w,h);
+    ctx.globalCompositeOperation = isDark ? 'screen' : 'multiply';
+    const alpha = isDark ? 0.6 : 0.2;
+    const minDim = Math.min(w,h);
+    blobs.forEach(b=>{
+      const cx = w*b.ox + Math.cos(t*b.sx+b.px)*w*b.ax*0.4;
+      const cy = h*b.oy + Math.sin(t*b.sy+b.py)*h*b.ay*0.4;
+      const r = minDim*b.baseR;
+      const grad = ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+      grad.addColorStop(0, hexToRgba(b.color, alpha));
+      grad.addColorStop(1, hexToRgba(b.color, 0));
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+    });
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  function loop(ts){ draw(ts/6000); raf = requestAnimationFrame(loop); }
+  if (reduceMotion){ draw(0.4); }
+  else {
+    raf = requestAnimationFrame(loop);
+    document.addEventListener('visibilitychange', ()=>{
+      if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(loop);
+    });
+  }
+})();
+
+/* ---------- CONFIGURATOR ---------- */
+const PRODUCTS = {
+  tshirt:  { label:'T-Shirt',  colors:{White:'#F5F3EC', Black:'#1B1B1B', Navy:'#1E2A4A', Coral:'#FF4B2B'}, sizes:['S','M','L','XL','XXL'], area:{left:34,top:35,width:32,height:34} },
+  mug:     { label:'Mug',      colors:{White:'#FFFFFF', Black:'#1B1B1B'},                                   sizes:null, area:{left:28,top:35,width:36,height:33} },
+  bag:     { label:'Tote Bag', colors:{Natural:'#E7DFC8', Black:'#1B1B1B'},                                 sizes:null, area:{left:27,top:47,width:44,height:34} },
+  giftset: { label:'Gift Set', colors:{Kraft:'#C8A876', White:'#FFFFFF'},                                   sizes:null, area:{left:60,top:47,width:18,height:26} },
+};
+
+let currentProduct = 'tshirt';
+let currentColor = Object.keys(PRODUCTS.tshirt.colors)[0];
+let currentSize = PRODUCTS.tshirt.sizes[0];
+
+const productTabs = document.getElementById('productTabs');
+const colorSwatchesEl = document.getElementById('colorSwatches');
+const sizeField = document.getElementById('sizeField');
+const sizeButtonsEl = document.getElementById('sizeButtons');
+const logoWrap = document.getElementById('logoWrap');
+const logoImg = document.getElementById('logoImg');
+const stage = document.getElementById('stage');
+
+function applyProduct(){
+  document.querySelectorAll('.mockup-layer').forEach(el=>{
+    el.classList.toggle('active', el.dataset.product === currentProduct);
+  });
+  document.querySelectorAll('.ptab').forEach(el=>{
+    el.classList.toggle('active', el.dataset.product === currentProduct);
+  });
+  const cfg = PRODUCTS[currentProduct];
+  if (!(currentColor in cfg.colors)) currentColor = Object.keys(cfg.colors)[0];
+  document.querySelector(`.mockup-layer[data-product="${currentProduct}"]`).style.color = cfg.colors[currentColor];
+
+  colorSwatchesEl.innerHTML = Object.entries(cfg.colors).map(([name,hex])=>
+    `<button class="swatch ${name===currentColor?'active':''}" style="background:${hex}" data-name="${name}" title="${name}" type="button"></button>`
+  ).join('');
+
+  if (cfg.sizes){
+    sizeField.style.display = '';
+    if (!cfg.sizes.includes(currentSize)) currentSize = cfg.sizes[0];
+    sizeButtonsEl.innerHTML = cfg.sizes.map(s=>
+      `<button class="size-btn ${s===currentSize?'active':''}" data-size="${s}" type="button">${s}</button>`
+    ).join('');
+  } else {
+    sizeField.style.display = 'none';
+  }
+
+  updateLogoPosition();
+}
+
+productTabs.addEventListener('click', e=>{
+  const btn = e.target.closest('.ptab');
+  if (!btn) return;
+  currentProduct = btn.dataset.product;
+  applyProduct();
+});
+
+colorSwatchesEl.addEventListener('click', e=>{
+  const btn = e.target.closest('.swatch');
+  if (!btn) return;
+  currentColor = btn.dataset.name;
+  document.querySelector(`.mockup-layer[data-product="${currentProduct}"]`).style.color = PRODUCTS[currentProduct].colors[currentColor];
+  document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('active', s.dataset.name===currentColor));
+});
+
+sizeButtonsEl.addEventListener('click', e=>{
+  const btn = e.target.closest('.size-btn');
+  if (!btn) return;
+  currentSize = btn.dataset.size;
+  document.querySelectorAll('.size-btn').forEach(s=>s.classList.toggle('active', s.dataset.size===currentSize));
+});
+
+/* quantity */
+const qtyInput = document.getElementById('qtyInput');
+document.getElementById('qtyMinus').addEventListener('click', ()=>{ qtyInput.value = Math.max(1, (+qtyInput.value||1) - 1); });
+document.getElementById('qtyPlus').addEventListener('click', ()=>{ qtyInput.value = (+qtyInput.value||1) + 1; });
+
+/* upload */
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const uploadStatus = document.getElementById('uploadStatus');
+let uploadedFileName = '';
+uploadZone.addEventListener('click', ()=>fileInput.click());
+fileInput.addEventListener('change', ()=>{
+  const file = fileInput.files[0];
+  if (!file) return;
+  uploadedFileName = file.name;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    logoImg.src = e.target.result;
+    uploadStatus.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
+/* scale & position sliders */
+const scaleSlider = document.getElementById('scaleSlider');
+const posXSlider = document.getElementById('posXSlider');
+const posYSlider = document.getElementById('posYSlider');
+const scaleVal = document.getElementById('scaleVal');
+const posXVal = document.getElementById('posXVal');
+const posYVal = document.getElementById('posYVal');
+
+function updateLogoPosition(){
+  const cfg = PRODUCTS[currentProduct];
+  const area = cfg.area;
+  const scale = (+scaleSlider.value) / 100;
+  const stageW = stage.clientWidth, stageH = stage.clientHeight;
+  const areaW = stageW * area.width/100;
+  const areaH = stageH * area.height/100;
+  const cx = stageW * (area.left + area.width/2)/100 + (+posXSlider.value/100)*areaW;
+  const cy = stageH * (area.top + area.height/2)/100 + (+posYSlider.value/100)*areaH;
+  const w = areaW * scale, h = areaH * scale;
+  logoWrap.style.width = w+'px';
+  logoWrap.style.height = h+'px';
+  logoWrap.style.left = (cx - w/2)+'px';
+  logoWrap.style.top = (cy - h/2)+'px';
+  scaleVal.textContent = scaleSlider.value+'%';
+  posXVal.textContent = posXSlider.value;
+  posYVal.textContent = posYSlider.value;
+}
+[scaleSlider, posXSlider, posYSlider].forEach(s=>s.addEventListener('input', updateLogoPosition));
+window.addEventListener('resize', updateLogoPosition);
+
+applyProduct();
+
+/* send order */
+document.getElementById('sendOrder').addEventListener('click', ()=>{
+  const cfg = PRODUCTS[currentProduct];
+  const name = document.getElementById('custName').value.trim() || 'there';
+  const contact = document.getElementById('custContact').value.trim();
+  const notes = document.getElementById('custNotes').value.trim();
+  const qty = qtyInput.value;
+  let msg = `Hi Sreerag, I'd like to order custom merch:\n`;
+  msg += `Product: ${cfg.label}\n`;
+  msg += `Colour: ${currentColor}\n`;
+  if (cfg.sizes) msg += `Size: ${currentSize}\n`;
+  msg += `Quantity: ${qty}\n`;
+  if (uploadedFileName) msg += `Logo file: ${uploadedFileName} (attaching separately)\n`;
+  if (notes) msg += `Notes: ${notes}\n`;
+  msg += `\nFrom: ${name}`;
+  if (contact) msg += ` (${contact})`;
+  window.open('https://wa.me/971588338975?text=' + encodeURIComponent(msg), '_blank');
+  document.getElementById('sentMsg').style.display = 'block';
+});
+
+/* corporate gifts enquiry */
+let giftFileName = '';
+const giftUploadZone = document.getElementById('giftUploadZone');
+const giftFileInput = document.getElementById('giftFileInput');
+const giftUploadStatus = document.getElementById('giftUploadStatus');
+giftUploadZone.addEventListener('click', ()=>giftFileInput.click());
+giftFileInput.addEventListener('change', ()=>{
+  const file = giftFileInput.files[0];
+  if (!file) return;
+  giftFileName = file.name;
+  giftUploadStatus.style.display = 'block';
+});
+document.getElementById('giftSend').addEventListener('click', ()=>{
+  const name = document.getElementById('giftName').value.trim() || 'there';
+  const contact = document.getElementById('giftContact').value.trim();
+  const notes = document.getElementById('giftNotes').value.trim();
+  let msg = `Hi Sreerag, I'd like a corporate gift set:\n`;
+  if (notes) msg += `Details: ${notes}\n`;
+  if (giftFileName) msg += `Logo file: ${giftFileName} (attaching separately)\n`;
+  msg += `\nFrom: ${name}`;
+  if (contact) msg += ` (${contact})`;
+  window.open('https://wa.me/971588338975?text=' + encodeURIComponent(msg), '_blank');
+  document.getElementById('giftSentMsg').style.display = 'block';
+});
+</script>
+</body>
+</html>
