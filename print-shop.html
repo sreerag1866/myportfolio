@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Shop — Custom Branded Merch | Sreerag Ayyappath</title>
+<meta name="description" content="Upload a photo of your item and your logo, place it live, and order directly on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#2451FF; --accent-ink:#0f2ea8; --signal:#FF4B2B; --violet:#8B5CF6; --teal:#17C3B2; --gold:#FFC53D;
+  --radius:2px; --maxw:1240px;
+}
+html[data-theme="dark"]{
+  --bg:#14161A; --bg-raised:#1B1E24; --ink:#EDEBE3; --ink-dim:#9A9C9C; --line:#33363D;
+  --shadow:0 24px 60px rgba(0,0,0,.5); --stage-bg:#0f1114;
+}
+html[data-theme="light"]{
+  --bg:#F2EFE7; --bg-raised:#FFFFFF; --ink:#181812; --ink-dim:#6B6A5F; --line:#D8D3C4;
+  --shadow:0 20px 50px rgba(30,25,10,.14); --stage-bg:#e9e4d4;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;margin:0;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+.section{padding:88px 0;border-bottom:1px solid var(--line);position:relative;z-index:1;}
+.section-num{font-family:'Space Grotesk';font-size:13px;color:var(--accent);letter-spacing:.08em;}
+.section-title{font-size:clamp(26px,4vw,42px);line-height:1.08;margin-top:8px;}
+.muted{color:var(--ink-dim);}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important;transition-duration:.001ms !important;} }
+
+#bgCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block;}
+
+/* NAV */
+header.nav{position:fixed;top:0;left:0;right:0;z-index:60;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brandmark{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:600;font-size:15px;}
+.brandmark .box{width:30px;height:30px;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:12px;}
+.navlinks{display:flex;gap:24px;align-items:center;}
+.navlinks a{font-size:14px;color:var(--ink-dim);}
+.navlinks a:hover, .navlinks a.current{color:var(--ink);}
+.navlinks a.cta{color:#fff;background:var(--accent);padding:9px 16px;border-radius:var(--radius);font-weight:500;}
+.theme-toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:20px;padding:4px 6px;background:var(--bg-raised);}
+.theme-toggle button{border:0;background:transparent;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-dim);}
+.theme-toggle button[aria-pressed="true"]{background:var(--accent);color:#fff;}
+.theme-toggle svg{width:14px;height:14px;}
+.navburger{display:none;border:0;background:transparent;color:var(--ink);}
+.navtools{display:flex;align-items:center;gap:14px;}
+@media (max-width:900px){
+  .navlinks{position:fixed;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;align-items:stretch;padding:18px 28px;gap:16px;border-bottom:1px solid var(--line);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+  .navlinks.open{opacity:1;transform:translateY(0);pointer-events:auto;}
+  .navburger{display:block;}
+}
+
+/* HERO */
+.hero{padding:150px 0 70px;}
+.eyebrow-line{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-dim);margin-bottom:18px;}
+.eyebrow-line .dot{width:7px;height:7px;border-radius:50%;background:var(--signal);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero h1{font-size:clamp(36px,6vw,66px);line-height:1.03;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero p.lead{margin-top:18px;max-width:560px;color:var(--ink-dim);font-size:17px;}
+.hero-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:var(--radius);font-weight:500;font-size:15px;border:1px solid var(--ink);}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent-ink);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;}
+.btn-ghost:hover{background:var(--bg-raised);}
+
+/* CONFIGURATOR */
+.configurator{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start;}
+@media (max-width:960px){ .configurator{grid-template-columns:1fr;} }
+
+.config-panel{background:var(--bg-raised);border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
+.field{margin-bottom:20px;}
+.field label{display:block;font-size:12.5px;letter-spacing:.04em;color:var(--ink-dim);margin-bottom:9px;}
+.qty-row{display:flex;align-items:center;gap:12px;}
+.qty-btn{width:34px;height:34px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:var(--radius);font-size:16px;}
+.qty-row input{width:56px;text-align:center;background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:8px 4px;border-radius:var(--radius);font-family:inherit;font-size:14.5px;}
+.upload-zone{border:1.5px dashed var(--line);border-radius:var(--radius);padding:22px;text-align:center;cursor:pointer;background:var(--bg);}
+.upload-zone:hover{border-color:var(--accent);}
+.upload-zone svg{width:26px;height:26px;color:var(--ink-dim);margin-bottom:8px;}
+.upload-zone p{margin:0;font-size:13.5px;color:var(--ink-dim);}
+.upload-zone input{display:none;}
+.upload-status{margin-top:8px;font-size:12.5px;color:var(--accent);display:none;}
+.slider-row{display:flex;align-items:center;gap:12px;}
+.slider-row input[type="range"]{flex:1;accent-color:var(--accent);}
+.slider-row span{width:38px;font-size:12px;color:var(--ink-dim);text-align:right;}
+.field input[type="text"], .field textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);
+  padding:11px 13px;border-radius:var(--radius);font-family:inherit;font-size:14.5px;
+}
+.field textarea{min-height:80px;resize:vertical;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-note{font-size:12.5px;color:var(--ink-dim);margin-top:10px;}
+#sentMsg{display:none;margin-top:14px;padding:12px 14px;border:1px solid var(--accent);color:var(--accent);font-size:13.5px;border-radius:var(--radius);}
+
+/* STAGE (live preview) */
+.stage-outer{position:sticky;top:100px;}
+.mockup-stage{
+  position:relative;background:var(--stage-bg);border:1px solid var(--line);border-radius:var(--radius);
+  aspect-ratio:400/460;overflow:hidden;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;
+}
+.mockup-stage::before{
+  content:'';position:absolute;inset:-36px;z-index:-1;border-radius:40%;
+  background:conic-gradient(from 45deg, var(--accent), var(--signal), var(--violet), var(--teal), var(--accent));
+  filter:blur(56px);opacity:.45;animation:stageGlow 16s linear infinite;
+}
+@keyframes stageGlow{ to{ transform:rotate(360deg); } }
+.crop{position:absolute;width:20px;height:20px;pointer-events:none;opacity:.5;z-index:2;}
+.crop::before,.crop::after{content:'';position:absolute;background:var(--ink);}
+.crop::before{width:100%;height:1px;top:50%;}
+.crop::after{width:1px;height:100%;left:50%;}
+.crop.tl{top:14px;left:14px;} .crop.tr{top:14px;right:14px;}
+.crop.bl{bottom:14px;left:14px;} .crop.br{bottom:14px;right:14px;}
+#stageEmpty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--ink-dim);text-align:center;padding:30px;}
+#stageEmpty svg{width:38px;height:38px;opacity:.5;}
+#stageEmpty p{margin:0;font-size:13.5px;line-height:1.5;}
+#itemImg{display:none;max-width:100%;max-height:100%;object-fit:contain;position:relative;z-index:1;}
+#logoWrap{position:absolute;display:none;align-items:center;justify-content:center;z-index:2;cursor:grab;touch-action:none;}
+#logoWrap.dragging{cursor:grabbing;}
+#logoWrap img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));}
+#logoWrap::after{
+  content:'';position:absolute;inset:-6px;border:1.5px dashed var(--accent);border-radius:4px;
+  opacity:0;transition:opacity .15s;
+}
+#logoWrap:hover::after, #logoWrap.dragging::after{opacity:.8;}
+.stage-caption{margin-top:14px;font-size:12.5px;color:var(--ink-dim);text-align:center;}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.step{border:1px solid var(--line);padding:22px;border-radius:var(--radius);background:var(--bg-raised);}
+.step .n{font-family:'Space Grotesk';font-size:13px;color:var(--accent);margin-bottom:10px;}
+.step h3{font-size:16px;margin-bottom:8px;}
+.step p{font-size:13.5px;color:var(--ink-dim);margin:0;}
+@media (max-width:860px){ .steps{grid-template-columns:1fr 1fr;} }
+@media (max-width:520px){ .steps{grid-template-columns:1fr;} }
+
+/* GIFT SET STRIP */
+.giftbanner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--bg-raised);border:1px solid var(--line);padding:26px 30px;border-radius:var(--radius);}
+.giftbanner h3{font-size:19px;}
+.giftbanner p{margin:6px 0 0;color:var(--ink-dim);font-size:14px;max-width:460px;}
+
+.gift-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.gift-card{background:var(--bg-raised);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+.gift-card img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.gift-body{padding:14px 16px 18px;}
+.gift-body h3{font-size:15px;}
+.gift-body p{font-size:12.5px;color:var(--ink-dim);margin:6px 0 0;}
+@media (max-width:960px){ .gift-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){ .gift-grid{grid-template-columns:1fr;} }
+
+footer{padding:34px 0;position:relative;z-index:1;}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-dim);}
+
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:70;display:flex;align-items:center;gap:10px;background:#22c55e;color:#fff;padding:14px 18px;border-radius:32px;box-shadow:0 12px 30px rgba(0,0,0,.3);font-weight:500;font-size:14px;}
+.wa-float .ping{position:absolute;top:-3px;right:-3px;width:12px;height:12px;background:#22c55e;border-radius:50%;}
+.wa-float .ping::after{content:'';position:absolute;inset:0;border-radius:50%;background:#22c55e;animation:ping 1.8s infinite;}
+@keyframes ping{0%{transform:scale(1);opacity:.7;}100%{transform:scale(2.4);opacity:0;}}
+.wa-float:hover{background:#1ea952;}
+@media (max-width:560px){ .wa-float span.label{display:none;} .wa-float{padding:14px;} }
+</style>
+</head>
+<body>
+<canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a href="index.html" class="brandmark"><span class="box">SA</span> SREERAG AYYAPPATH</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="index.html">Portfolio</a>
+      <a href="print-shop.html" class="current">Print Shop</a>
+      <a href="#configure" class="cta">Start designing</a>
+    </nav>
+    <div class="navtools">
+      <div class="theme-toggle" role="group" aria-label="Theme switch">
+        <button id="btnLight" aria-pressed="false" aria-label="Light theme" title="Light">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button id="btnDark" aria-pressed="true" aria-label="Dark theme" title="Dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg>
+        </button>
+      </div>
+      <button class="navburger" id="burger" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow-line"><span class="dot"></span> Custom branded merch — printed to order</div>
+    <h1>Put your brand on<br><em>real things.</em></h1>
+    <p class="lead">Upload a photo of anything you want branded — t-shirt, mug, bag, box, whatever — drop your logo on top, and send it straight to WhatsApp. No account, no cart, no waiting on a quote.</p>
+    <div class="hero-actions">
+      <a href="#configure" class="btn btn-primary">Start designing</a>
+      <a href="#how" class="btn btn-ghost">How it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="configure">
+  <div class="wrap">
+    <div class="section-num">01 — DESIGN YOUR OWN PRINT</div>
+    <h2 class="section-title" style="margin-bottom:30px;">Upload it. Brand it. Order it.</h2>
+
+    <div class="configurator">
+      <div class="config-panel">
+        <div class="field">
+          <label>1. Upload a photo of your item</label>
+          <div class="upload-zone" id="itemUploadZone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/><path d="M12 12V3M8 7l4-4 4 4"/><circle cx="12" cy="15" r="1"/></svg>
+            <p>Any t-shirt, mug, bag, box or product photo you want to brand</p>
+            <input type="file" id="itemFileInput" accept="image/*">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>2. Upload your logo</label>
+          <div class="upload-zone" id="uploadZone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+            <p>PNG with a transparent background works best</p>
+            <input type="file" id="fileInput" accept="image/*">
+          </div>
+          <div class="upload-status" id="uploadStatus">Logo loaded — drag it on the preview, or use the sliders below.</div>
+        </div>
+
+        <div class="field">
+          <label>Logo size</label>
+          <div class="slider-row"><input type="range" id="scaleSlider" min="8" max="80" value="30"><span id="scaleVal">30%</span></div>
+        </div>
+        <div class="field">
+          <label>Horizontal position</label>
+          <div class="slider-row"><input type="range" id="posXSlider" min="0" max="100" value="50"><span id="posXVal">50</span></div>
+        </div>
+        <div class="field">
+          <label>Vertical position</label>
+          <div class="slider-row"><input type="range" id="posYSlider" min="0" max="100" value="50"><span id="posYVal">50</span></div>
+        </div>
+
+        <div class="field">
+          <label>Quantity</label>
+          <div class="qty-row">
+            <button class="qty-btn" id="qtyMinus" type="button">−</button>
+            <input type="number" id="qtyInput" value="1" min="1">
+            <button class="qty-btn" id="qtyPlus" type="button">+</button>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="custName">Your name</label>
+            <input id="custName" type="text" placeholder="Full name">
+          </div>
+          <div class="field">
+            <label for="custContact">WhatsApp / email</label>
+            <input id="custContact" type="text" placeholder="+971...">
+          </div>
+        </div>
+        <div class="field">
+          <label for="custNotes">Notes (item, deadline, anything else)</label>
+          <textarea id="custNotes" placeholder="e.g. it's a black hoodie, need it by Friday..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="sendOrder" style="width:100%;justify-content:center;">Send order via WhatsApp</button>
+        <div id="sentMsg">Opening WhatsApp — attach your item photo and logo file in the chat so we have the originals.</div>
+        <p class="form-note">This preview is for placement reference only — your original files are what actually get printed. Nothing is uploaded to a server; attach them directly in WhatsApp.</p>
+      </div>
+
+      <div class="stage-outer">
+        <div class="mockup-stage" id="stage">
+          <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+          <div id="stageEmpty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/><path d="M12 12V3M8 7l4-4 4 4"/></svg>
+            <p>Upload a photo of your item<br>to see it here</p>
+          </div>
+          <img id="itemImg" alt="Your uploaded item">
+          <div id="logoWrap"><img id="logoImg" alt="Your uploaded logo placed on the item"></div>
+        </div>
+        <p class="stage-caption">Drag the logo to reposition it — live placement preview only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="corporate">
+  <div class="wrap">
+    <div class="section-num">02 — CORPORATE GIFTS</div>
+    <h2 class="section-title" style="margin-bottom:14px;">Real sets we've produced</h2>
+    <p class="muted" style="max-width:520px;margin-bottom:32px;">These are actual corporate gifting jobs — notebooks, bottles, pens and apparel, branded and boxed. Send your logo and we'll put together a set like this for your team or event.</p>
+
+    <div class="gift-grid">
+      <div class="gift-card">
+        <img src="assets/promo-giftsets.jpg" alt="Branded notebook, bottle and pen gift set">
+        <div class="gift-body"><h3>Notebook &amp; Pen Sets</h3><p>Branded notebooks paired with pens and bottles, boxed for presentation.</p></div>
+      </div>
+      <div class="gift-card">
+        <img src="assets/promo-polos.jpg" alt="Branded polo shirts in three colours">
+        <div class="gift-body"><h3>Uniform &amp; Apparel</h3><p>Colour-coded polos and staff wear, branded across business lines.</p></div>
+      </div>
+      <div class="gift-card">
+        <img src="assets/promo-mug.jpg" alt="Branded anniversary mug">
+        <div class="gift-body"><h3>Mugs &amp; Drinkware</h3><p>Anniversary and event mugs, individually branded.</p></div>
+      </div>
+      <div class="gift-card">
+        <img src="assets/promo-umbrellas.jpg" alt="Branded promotional umbrellas">
+        <div class="gift-body"><h3>Promotional Merchandise</h3><p>Umbrellas, bags and forecourt giveaways branded to spec.</p></div>
+      </div>
+    </div>
+
+    <div class="config-panel" style="margin-top:36px;max-width:640px;">
+      <h3 style="font-size:18px;margin-bottom:6px;">Enquire about a corporate gift set</h3>
+      <p class="muted" style="font-size:13.5px;margin:0 0 20px;">Upload your logo, tell us what you need, and we'll reply with options on WhatsApp.</p>
+      <div class="field">
+        <label>Your logo / artwork</label>
+        <div class="upload-zone" id="giftUploadZone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          <p>Click to upload your logo</p>
+          <input type="file" id="giftFileInput" accept="image/*">
+        </div>
+        <div class="upload-status" id="giftUploadStatus">Logo attached — mention it in the message below.</div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="giftName">Your name</label><input id="giftName" type="text" placeholder="Full name"></div>
+        <div class="field"><label for="giftContact">WhatsApp / email</label><input id="giftContact" type="text" placeholder="+971..."></div>
+      </div>
+      <div class="field">
+        <label for="giftNotes">What do you need?</label>
+        <textarea id="giftNotes" placeholder="e.g. 50 gift sets with mug + notebook + pen, our logo in navy..."></textarea>
+      </div>
+      <button class="btn btn-primary" id="giftSend" style="width:100%;justify-content:center;">Send enquiry via WhatsApp</button>
+      <div id="giftSentMsg" style="display:none;margin-top:14px;padding:12px 14px;border:1px solid var(--accent);color:var(--accent);font-size:13.5px;border-radius:var(--radius);">Opening WhatsApp — attach your logo file in the chat.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-num">03 — HOW IT WORKS</div>
+    <h2 class="section-title" style="margin-bottom:32px;">From upload to delivery</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Upload your item</h3><p>A photo of anything you want branded — t-shirt, mug, bag, box, whatever it is.</p></div>
+      <div class="step"><div class="n">02</div><h3>Place &amp; preview</h3><p>Scale and position it live so you know roughly how it'll sit before ordering.</p></div>
+      <div class="step"><div class="n">03</div><h3>Confirm on WhatsApp</h3><p>Send the order — attach your original file and we'll confirm print size and price.</p></div>
+      <div class="step"><div class="n">04</div><h3>Printed &amp; delivered</h3><p>Produced locally in Dubai, picked up or shipped to your door.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:0;">
+  <div class="wrap">
+    <div class="giftbanner">
+      <div>
+        <h3>Building a gift set?</h3>
+        <p>Mug + tote bag + tee, all with the same logo — great for corporate gifting, team swag or event giveaways. Mention it in your notes and we'll bundle the pricing.</p>
+      </div>
+      <a class="btn btn-primary" href="https://wa.me/971588338975?text=Hi%20Sreerag%2C%20I%27d%20like%20a%20bundled%20gift%20set%20with%20our%20logo%20on%20a%20mug%2C%20tote%20bag%20and%20t-shirt." target="_blank" rel="noopener">Ask about bundles</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© <span id="year"></span> Sreerag Ayyappath — Print Shop</span>
+    <span style="display:flex;gap:18px;">
+      <a href="index.html">Portfolio</a>
+    </span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/971588338975?text=Hi%20Sreerag%2C%20I%27d%20like%20to%20print%20our%20logo%20on%20some%20merchandise." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A9 9 0 0 0 3 17.7L2 22l4.4-1.1A9 9 0 1 0 17.6 6.3ZM12 20a8 8 0 0 1-4-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-1.3-.6-2.2-1.5-2.8-2.6-.1-.2-.1-.4.1-.5l.6-.7c.1-.2.1-.4 0-.6l-.7-1.6c-.1-.3-.4-.3-.6-.3h-.5c-.2 0-.5.1-.6.3-.2.3-.7 1-.7 2s.6 2.1 1.4 3c1 1.2 2.2 2 3.7 2.5 1.6.5 1.6.4 1.9.3.3-.1 1.1-.5 1.3-1 .2-.4.2-.8.1-.9-.1-.1-.2-.2-.4-.2Z"/></svg>
+  <span class="ping"></span>
+  <span class="label">Chat on WhatsApp</span>
+</a>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* THEME */
+const root = document.documentElement;
+const btnLight = document.getElementById('btnLight');
+const btnDark = document.getElementById('btnDark');
+function setTheme(t){
+  root.setAttribute('data-theme', t);
+  btnLight.setAttribute('aria-pressed', t === 'light');
+  btnDark.setAttribute('aria-pressed', t === 'dark');
+  try{ localStorage.setItem('sa-shop-theme', t); }catch(e){}
+}
+let savedTheme = 'dark';
+try{ savedTheme = localStorage.getItem('sa-shop-theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark'); }catch(e){}
+setTheme(savedTheme);
+btnLight.addEventListener('click', ()=>setTheme('light'));
+btnDark.addEventListener('click', ()=>setTheme('dark'));
+
+/* MOBILE NAV */
+document.getElementById('burger').addEventListener('click', ()=>{
+  document.getElementById('navlinks').classList.toggle('open');
+});
+
+/* GENERATIVE BACKGROUND */
+(function(){
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  let w, h, raf;
+  const palette = ['#2451FF', '#FF4B2B', '#8B5CF6', '#17C3B2', '#FFC53D', '#FF3D9A'];
+  const blobs = palette.map((color, i) => ({
+    color, baseR: 0.28 + i * 0.04,
+    ax: 0.20 + Math.random()*0.15, ay: 0.18 + Math.random()*0.15,
+    px: Math.random()*Math.PI*2, py: Math.random()*Math.PI*2,
+    sx: 0.05 + Math.random()*0.04, sy: 0.05 + Math.random()*0.04,
+    ox: 0.25 + Math.random()*0.5, oy: 0.25 + Math.random()*0.5
+  }));
+  function resize(){
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    canvas.style.width = w+'px'; canvas.style.height = h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  function hexToRgba(hex,a){
+    const n = parseInt(hex.slice(1),16);
+    return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+  }
+  function draw(t){
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    ctx.clearRect(0,0,w,h);
+    ctx.globalCompositeOperation = isDark ? 'screen' : 'multiply';
+    const alpha = isDark ? 0.6 : 0.2;
+    const minDim = Math.min(w,h);
+    blobs.forEach(b=>{
+      const cx = w*b.ox + Math.cos(t*b.sx+b.px)*w*b.ax*0.4;
+      const cy = h*b.oy + Math.sin(t*b.sy+b.py)*h*b.ay*0.4;
+      const r = minDim*b.baseR;
+      const grad = ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+      grad.addColorStop(0, hexToRgba(b.color, alpha));
+      grad.addColorStop(1, hexToRgba(b.color, 0));
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+    });
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  function loop(ts){ draw(ts/6000); raf = requestAnimationFrame(loop); }
+  if (reduceMotion){ draw(0.4); }
+  else {
+    raf = requestAnimationFrame(loop);
+    document.addEventListener('visibilitychange', ()=>{
+      if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(loop);
+    });
+  }
+})();
+
+/* ---------- CONFIGURATOR ---------- */
+const stage = document.getElementById('stage');
+const stageEmpty = document.getElementById('stageEmpty');
+const itemImg = document.getElementById('itemImg');
+const logoWrap = document.getElementById('logoWrap');
+const logoImg = document.getElementById('logoImg');
+
+/* item photo upload */
+const itemUploadZone = document.getElementById('itemUploadZone');
+const itemFileInput = document.getElementById('itemFileInput');
+let itemFileName = '';
+itemUploadZone.addEventListener('click', ()=>itemFileInput.click());
+itemFileInput.addEventListener('change', ()=>{
+  const file = itemFileInput.files[0];
+  if (!file) return;
+  itemFileName = file.name;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    itemImg.src = e.target.result;
+    itemImg.style.display = 'block';
+    stageEmpty.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+
+/* logo upload */
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const uploadStatus = document.getElementById('uploadStatus');
+let logoFileName = '';
+uploadZone.addEventListener('click', ()=>fileInput.click());
+fileInput.addEventListener('change', ()=>{
+  const file = fileInput.files[0];
+  if (!file) return;
+  logoFileName = file.name;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    logoImg.src = e.target.result;
+    logoWrap.style.display = 'flex';
+    uploadStatus.style.display = 'block';
+    render();
+  };
+  reader.readAsDataURL(file);
+});
+
+/* scale & position: sliders (percent of stage) */
+const scaleSlider = document.getElementById('scaleSlider');
+const posXSlider = document.getElementById('posXSlider');
+const posYSlider = document.getElementById('posYSlider');
+const scaleVal = document.getElementById('scaleVal');
+const posXVal = document.getElementById('posXVal');
+const posYVal = document.getElementById('posYVal');
+
+function render(){
+  const stageW = stage.clientWidth, stageH = stage.clientHeight;
+  const minDim = Math.min(stageW, stageH);
+  const scalePct = +scaleSlider.value;
+  const size = minDim * (scalePct/100);
+  const cx = stageW * (+posXSlider.value/100);
+  const cy = stageH * (+posYSlider.value/100);
+  logoWrap.style.width = size+'px';
+  logoWrap.style.height = size+'px';
+  logoWrap.style.left = (cx - size/2)+'px';
+  logoWrap.style.top = (cy - size/2)+'px';
+  scaleVal.textContent = scalePct+'%';
+  posXVal.textContent = posXSlider.value;
+  posYVal.textContent = posYSlider.value;
+}
+[scaleSlider, posXSlider, posYSlider].forEach(s=>s.addEventListener('input', render));
+window.addEventListener('resize', render);
+render();
+
+/* drag to reposition */
+let dragging = false, dragOffsetX = 0, dragOffsetY = 0;
+function pointerPos(e){
+  const p = e.touches ? e.touches[0] : e;
+  return { x: p.clientX, y: p.clientY };
+}
+logoWrap.addEventListener('pointerdown', e=>{
+  dragging = true;
+  logoWrap.classList.add('dragging');
+  logoWrap.setPointerCapture(e.pointerId);
+  const rect = stage.getBoundingClientRect();
+  const pos = pointerPos(e);
+  dragOffsetX = pos.x - rect.left - stage.clientWidth*(+posXSlider.value/100);
+  dragOffsetY = pos.y - rect.top - stage.clientHeight*(+posYSlider.value/100);
+});
+logoWrap.addEventListener('pointermove', e=>{
+  if (!dragging) return;
+  const rect = stage.getBoundingClientRect();
+  const pos = pointerPos(e);
+  let px = ((pos.x - rect.left - dragOffsetX) / stage.clientWidth) * 100;
+  let py = ((pos.y - rect.top - dragOffsetY) / stage.clientHeight) * 100;
+  px = Math.max(0, Math.min(100, px));
+  py = Math.max(0, Math.min(100, py));
+  posXSlider.value = px.toFixed(0);
+  posYSlider.value = py.toFixed(0);
+  render();
+});
+['pointerup','pointercancel'].forEach(evt=>{
+  logoWrap.addEventListener(evt, ()=>{ dragging = false; logoWrap.classList.remove('dragging'); });
+});
+
+/* quantity */
+const qtyInput = document.getElementById('qtyInput');
+document.getElementById('qtyMinus').addEventListener('click', ()=>{ qtyInput.value = Math.max(1, (+qtyInput.value||1) - 1); });
+document.getElementById('qtyPlus').addEventListener('click', ()=>{ qtyInput.value = (+qtyInput.value||1) + 1; });
+
+/* confetti burst — small celebratory touch on send */
+function burstConfetti(originEl){
+  const rect = originEl.getBoundingClientRect();
+  const colors = ['#2451FF','#FF4B2B','#8B5CF6','#17C3B2','#FFC53D'];
+  for (let i=0; i<24; i++){
+    const p = document.createElement('span');
+    const size = 5 + Math.random()*5;
+    p.style.cssText = `position:fixed;left:${rect.left+rect.width/2}px;top:${rect.top}px;width:${size}px;height:${size}px;background:${colors[i%colors.length]};border-radius:${Math.random()<0.5?'50%':'2px'};pointer-events:none;z-index:9999;opacity:1;transition:transform 1s cubic-bezier(.16,1,.3,1), opacity 1s ease-out;`;
+    document.body.appendChild(p);
+    const angle = (Math.random()*Math.PI) + Math.PI;
+    const dist = 80 + Math.random()*160;
+    const dx = Math.cos(angle)*dist;
+    const dy = Math.sin(angle)*dist - 60;
+    requestAnimationFrame(()=>{
+      p.style.transform = `translate(${dx}px, ${dy}px) rotate(${Math.random()*360}deg)`;
+      p.style.opacity = '0';
+    });
+    setTimeout(()=>p.remove(), 1100);
+  }
+}
+
+/* send order */
+document.getElementById('sendOrder').addEventListener('click', (e)=>{
+  const name = document.getElementById('custName').value.trim() || 'there';
+  const contact = document.getElementById('custContact').value.trim();
+  const notes = document.getElementById('custNotes').value.trim();
+  const qty = qtyInput.value;
+  let msg = `Hi Sreerag, I'd like to print my logo on my own item:\n`;
+  if (itemFileName) msg += `Item photo: ${itemFileName} (attaching separately)\n`;
+  if (logoFileName) msg += `Logo file: ${logoFileName} (attaching separately)\n`;
+  msg += `Quantity: ${qty}\n`;
+  if (notes) msg += `Notes: ${notes}\n`;
+  msg += `\nFrom: ${name}`;
+  if (contact) msg += ` (${contact})`;
+  window.open('https://wa.me/971588338975?text=' + encodeURIComponent(msg), '_blank');
+  document.getElementById('sentMsg').style.display = 'block';
+  burstConfetti(e.currentTarget);
+});
+
+/* corporate gifts enquiry */
+let giftFileName = '';
+const giftUploadZone = document.getElementById('giftUploadZone');
+const giftFileInput = document.getElementById('giftFileInput');
+const giftUploadStatus = document.getElementById('giftUploadStatus');
+giftUploadZone.addEventListener('click', ()=>giftFileInput.click());
+giftFileInput.addEventListener('change', ()=>{
+  const file = giftFileInput.files[0];
+  if (!file) return;
+  giftFileName = file.name;
+  giftUploadStatus.style.display = 'block';
+});
+document.getElementById('giftSend').addEventListener('click', ()=>{
+  const name = document.getElementById('giftName').value.trim() || 'there';
+  const contact = document.getElementById('giftContact').value.trim();
+  const notes = document.getElementById('giftNotes').value.trim();
+  let msg = `Hi Sreerag, I'd like a corporate gift set:\n`;
+  if (notes) msg += `Details: ${notes}\n`;
+  if (giftFileName) msg += `Logo file: ${giftFileName} (attaching separately)\n`;
+  msg += `\nFrom: ${name}`;
+  if (contact) msg += ` (${contact})`;
+  window.open('https://wa.me/971588338975?text=' + encodeURIComponent(msg), '_blank');
+  document.getElementById('giftSentMsg').style.display = 'block';
+});
+</script>
+</body>
+</html>
