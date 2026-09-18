@@ -1,0 +1,14 @@
+{
+  "name": "metaaiart-anime-proxy",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker proxy for MetaAiArt anime portrait generation",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "secret": "wrangler secret put ANTHROPIC_API_KEY",
+    "logs": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

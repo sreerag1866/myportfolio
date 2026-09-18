@@ -1,0 +1,16 @@
+name = "metaaiart-anime-proxy"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Worker runs on Cloudflare's free tier — no paid plan needed
+# It will be available at:
+#   https://metaaiart-anime-proxy.<your-cf-subdomain>.workers.dev
+# You can also add a custom route like:
+#   api.metaaiart.com/api/anime
+# by adding a route below (requires your domain on Cloudflare)
+
+# [Optional] Custom domain route — uncomment and fill in after adding
+# your domain to Cloudflare DNS
+# [[routes]]
+# pattern = "api.metaaiart.com/api/anime"
+# zone_name = "metaaiart.com"
