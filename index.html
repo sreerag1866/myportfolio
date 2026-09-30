@@ -183,7 +183,7 @@ h2{text-shadow:1px 1px 0 rgba(255,138,61,.75),2px 2px 0 rgba(194,65,12,.6),4px 8
 <section class="panel on" id="portfolio" role="tabpanel" aria-labelledby="t-portfolio">
   <div class="hero">
     <div class="hero-text">
-      <h1><span class="l"><b>Design is intelligence </b></span><span class="l"><b>made visible.</b></span></h1>
+      <h1><span class="l"><b>Sreerag</b></span><span class="l"><b>Ayyappath</b></span></h1>
       <p class="lead">Graphic designer in Dubai. I take logos, brochures, flyers and packaging from first sketch to finished print, and keep the artwork intact all the way to the press.</p>
       <div class="cta"><a class="btn p" href="#work" data-scroll="work">See the work</a><a class="btn" href="#contact" data-scroll="contact">Start a project</a></div>
       <div class="facts"><span>10+ years on press</span><span>Dubai, UAE</span><span>Illustrator · Photoshop · InDesign · CorelDRAW</span><span>Open to full-time and freelance</span></div>
@@ -220,7 +220,7 @@ h2{text-shadow:1px 1px 0 rgba(255,138,61,.75),2px 2px 0 rgba(194,65,12,.6),4px 8
 <section class="panel" id="photography" role="tabpanel" aria-labelledby="t-photography" hidden>
   <div class="hero" style="min-height:52vh">
     <h1 style="font-size:clamp(2.4rem,8vw,6.4rem)"><span class="l"><b>Through</b></span><span class="l"><b>the lens</b></span></h1>
-    <p class="lead">Light, streets and quiet corners. The frames below are sample images. Swap in your own photos to make this gallery yours.</p>
+    <p class="lead">Snow ridges, quiet gardens, fire and faces. A few frames from my own camera roll.</p>
   </div>
   <div class="grid" id="phgrid"></div>
 </section>
@@ -288,18 +288,21 @@ const WORK=[
 ["images/logo12.jpg","FOOD HUT LOGO","Logo design","Logos"]];
 /* PHOTOGRAPHY: same idea, ["images/file-name.jpg","Title","Caption"], */
 const PHOTO=[
-["images/dunes.jpg","Dune light","Sample frame"],
-["images/forest.jpg","Misty pine trail","Sample frame"],
-["images/road.jpg","Desert highway","Sample frame"],
-["images/silhouette.jpg","Golden hour silhouette","Sample frame"],
-["images/sky.jpg","Dusk skyline","Sample frame"],
-["images/waterfall.jpg","Green cliff falls","Sample frame"],
-["images/rain.jpg","City after rain","Sample frame"],
-["images/sea.jpg","Blue hour, open water","Sample frame"],
-["images/market.jpg","Old town market","Sample frame"],
-["images/mount.jpg","Layered ridges","Sample frame"],
-["images/bokeh.jpg","City after dark","Sample frame"],
-["images/moon.jpg","Moon over sand","Sample frame"]];
+["images/photo01.jpg","Orange bloom","Cosmos bud in the garden"],
+["images/photo02.jpg","Snow ridge","Alpine panorama under cloud"],
+["images/photo03.jpg","Sparks","Fire spitting embers at dusk"],
+["images/photo04.jpg","Green tangle","Vine and leaf, close up"],
+["images/photo05.jpg","Winter branches","Bare limbs against blue sky"],
+["images/photo06.jpg","Sunburst","Orange flower, macro"],
+["images/photo07.jpg","Eyes on you","Portrait of a mountain dog"],
+["images/photo08.jpg","Snow companion","Dog on a snowy slope"],
+["images/photo09.jpg","Pink pom","Mimosa blossom"],
+["images/photo10.jpg","Festival elephant","Decorated temple elephant"],
+["images/photo11.jpg","Breakfast plate","Eggs, greens and golden bake"],
+["images/photo12.jpg","Winter trees","Bare trees above the valley"],
+["images/photo13.jpg","Snowy valley","Ridgeline and cloud"],
+["images/photo14.jpg","New growth","Fresh bud and leaves"],
+["images/photo15.jpg","Hilltop garden","Cypress-lined viewpoint"]];
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 function build(el,list,title){el.innerHTML=list.map((w,i)=>`<button class="card" data-i="${i}" data-c="${w[3]||''}">${w[3]?`<span class="tag">${w[3]}</span>`:''}<div class="ph"><img loading="lazy" src="${w[0]}" alt="${w[1]}"><span class="view">View piece</span></div><div class="cap"><strong>${w[1]}</strong><small>${w[2]}</small></div></button>`).join('');reveal(el);}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.12});
