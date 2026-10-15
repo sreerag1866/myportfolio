@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sreerag Ayyappath – Graphic Designer, Dubai</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1f1c1d;--ink:#fff;--mut:#b9b4b0;--y:#ffe500;--card:#2a2627;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{background:var(--bg);color:var(--ink);font-family:Montserrat,system-ui,sans-serif;overflow-x:hidden}
+canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,header,nav,footer{position:relative;z-index:1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--y);outline-offset:3px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 5vw}
+.logo{width:44px;height:44px;border-radius:10px;background:var(--y);color:#1f1c1d;display:grid;place-items:center;font-weight:800;text-decoration:none}
+.top b{font-weight:600;font-size:1.25rem}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:4vw;align-items:center;padding:6vh 5vw 8vh;min-height:70vh}
+.hero h1{font-size:clamp(2.6rem,7vw,5.5rem);line-height:1.02;font-weight:800}
+.hero h1 span{display:block}
+.hero h1 .c{color:var(--y)}
+.hero p{color:var(--mut);margin-top:16px;font-size:1.1rem}
+.cta{display:inline-block;margin-top:26px;background:var(--y);color:#1f1c1d;font-weight:800;padding:14px 26px;border-radius:999px;text-decoration:none;transition:transform .2s}
+.cta:hover{transform:translateY(-3px) scale(1.04)}
+.scene{perspective:900px;display:grid;place-items:center;height:340px}
+.cube{width:200px;height:200px;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.cube div{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:1.5rem;border:2px solid var(--y);background:rgba(255,229,0,.08);backdrop-filter:blur(2px)}
+.cube div:nth-child(1){transform:translateZ(100px)}.cube div:nth-child(2){transform:rotateY(90deg) translateZ(100px);background:var(--y);color:#1f1c1d}
+.cube div:nth-child(3){transform:rotateY(180deg) translateZ(100px)}.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(100px);background:#fff;color:#1f1c1d}
+.cube div:nth-child(5){transform:rotateX(90deg) translateZ(100px)}.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(100px)}
+@keyframes spin{from{transform:rotateX(-18deg) rotateY(0)}to{transform:rotateX(-18deg) rotateY(360deg)}}
+nav{position:sticky;top:0;z-index:20;background:var(--y);color:#1f1c1d;display:flex;justify-content:space-around;flex-wrap:wrap;gap:6px 18px;padding:12px 4vw;padding-top:calc(12px + env(safe-area-inset-top,0px));font-family:Yellowtail,cursive;font-size:1.35rem}
+nav a{text-decoration:none;padding:2px 8px;transition:transform .2s}nav a:hover{transform:scale(1.15) rotate(-3deg)}
+section{padding:10vh 5vw}
+.tag{display:inline-block;font-family:Yellowtail,cursive;font-size:1.8rem;color:#1f1c1d;background:#e9e6e3;padding:14px 38px;clip-path:polygon(0 8%,6% 0,14% 10%,25% 2%,38% 9%,50% 0,63% 8%,76% 1%,88% 10%,100% 3%,98% 40%,100% 62%,97% 90%,86% 100%,72% 92%,58% 100%,44% 93%,30% 100%,16% 92%,5% 100%,0 85%,2% 50%);margin-bottom:34px}
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:4vw;max-width:1100px;margin:auto}
+.tl{border:2px solid #fff;border-radius:18px;padding:26px;display:grid;gap:18px;background:rgba(0,0,0,.25)}
+.tl div{display:grid;grid-template-columns:110px 1fr;gap:12px}.tl small{color:var(--y);font-weight:800}
+.tl p{color:var(--mut)}.tl strong{color:#fff;display:block}
+.bio{color:var(--mut);line-height:1.7;max-width:60ch}
+.stage{perspective:1400px;height:420px;position:relative;max-width:1000px;margin:auto;touch-action:pan-y}
+.cf{position:absolute;left:50%;top:50%;width:min(300px,62vw);height:380px;margin:-190px 0 0 calc(min(300px,62vw) / -2);border-radius:20px;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s;display:flex;align-items:flex-end;padding:20px;font-weight:800;font-size:1.2rem;text-decoration:none;color:#1f1c1d;cursor:pointer;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.cf img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:18px;background:#2a2627}.cf{border:2px solid var(--y)}.cf span{position:relative;background:#1f1c1d;color:#fff;padding:6px 12px;border-radius:8px;font-size:.9rem}
+.arrows{display:flex;justify-content:center;gap:40px;margin-top:20px}
+.arrows button{background:none;border:2px solid var(--y);color:var(--y);width:48px;height:48px;border-radius:50%;font-size:1.6rem;font-weight:800;cursor:pointer;transition:.2s}
+.arrows button:hover{background:var(--y);color:#1f1c1d;transform:scale(1.12)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:900px;margin:auto;perspective:1000px}
+.ph{aspect-ratio:1;overflow:hidden;cursor:zoom-in;padding:0;border:0;border-radius:18px;transition:transform .2s,box-shadow .2s;transform-style:preserve-3d;display:flex;align-items:flex-end;padding:14px;color:#1f1c1d;font-weight:800;animation:pop .6s both}
+.ph:hover{box-shadow:0 20px 40px rgba(255,229,0,.25)}
+@keyframes pop{from{opacity:0;transform:rotateX(40deg) translateY(30px)}}
+.contact{text-align:center}
+.links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:10px}
+.links a{border:2px solid var(--y);border-radius:999px;padding:14px 24px;text-decoration:none;font-weight:600;transition:.2s}
+.links a:hover{background:var(--y);color:#1f1c1d;transform:translateY(-4px)}
+.thanks{font-family:Yellowtail,cursive;color:var(--y);font-size:clamp(2.6rem,8vw,5rem);text-align:center;padding:8vh 5vw}
+footer{text-align:center;color:var(--mut);padding:0 5vw 6vh;font-size:.85rem}
+@media(max-width:760px){.hero,.about{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.tl div{grid-template-columns:1fr;gap:2px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}.logos{grid-template-columns:repeat(4,1fr);max-width:1000px}.logos .ph{aspect-ratio:900/640;animation:none}#lb{position:fixed;inset:0;z-index:50;background:rgba(15,13,14,.94);display:none;place-items:center;padding:4vw;cursor:zoom-out}#lb.on{display:grid}#lb img{max-width:92vw;max-height:80vh;border-radius:12px;box-shadow:0 0 0 2px var(--y)}#lb p{text-align:center;margin-top:12px;font-weight:600}.cf{font:inherit}@media(max-width:760px){.logos{grid-template-columns:repeat(2,1fr)}}
+.hero-img{width:min(100%,460px);filter:drop-shadow(0 20px 40px rgba(0,0,0,.5));animation:flt 6s ease-in-out infinite;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
+@keyframes flt{50%{transform:translateY(-12px)}}
+.scene{height:auto}.hero{grid-template-columns:1fr 1fr}.hero .scene{justify-self:end}
+.banner{display:flex;justify-content:center;padding:6vh 5vw 0}
+.torn{width:min(760px,100%);background:#e9e6e3;padding:16px;clip-path:polygon(0 6%,5% 0,13% 5%,24% 1%,36% 6%,49% 0,62% 5%,75% 1%,88% 6%,100% 1%,99% 35%,100% 60%,98% 92%,88% 100%,74% 95%,60% 100%,45% 95%,30% 100%,15% 95%,4% 100%,0 90%,1% 50%);filter:drop-shadow(0 20px 40px rgba(0,0,0,.6));animation:flt 8s ease-in-out infinite}
+.torn img{display:block;width:100%;clip-path:polygon(2% 8%,8% 3%,20% 7%,34% 3%,48% 8%,64% 3%,80% 7%,96% 3%,97% 40%,96% 70%,95% 94%,82% 97%,66% 93%,50% 97%,34% 93%,18% 97%,5% 93%,2% 60%)}
+.fig{display:block;width:100%;max-width:260px;height:auto;filter:drop-shadow(0 14px 24px rgba(0,0,0,.5))}
+.about{max-width:1100px;margin:auto auto 28px;grid-template-columns:1.3fr 1fr;align-items:end}
+.about .side{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.about .tag{margin-bottom:0}
+section>.bio{margin:0 auto;max-width:1100px}
+.split{display:grid;grid-template-columns:260px 1fr;gap:3vw;align-items:end;max-width:1200px;margin:auto}
+.split .side{display:flex;flex-direction:column;gap:14px;align-self:stretch;justify-content:space-between}
+.split .side .tag{align-self:flex-start;margin-bottom:0}
+.split.rev{grid-template-columns:1fr 260px}.split.rev .main{order:0}.split.rev .side{order:1;align-items:flex-end}.split.rev .side .tag{align-self:flex-end}
+.split.rev .side{order:0}.split.rev{direction:rtl}.split.rev>*{direction:ltr}
+.stage{max-width:none}.contact .split{align-items:center}.contact .links{justify-content:flex-start}.contact .fig.end{max-width:240px;justify-self:end;grid-column:3}
+.contact .split{grid-template-columns:260px 1fr 240px}
+.bye{display:flex;align-items:flex-end;justify-content:space-between;gap:4vw;max-width:1200px;margin:auto;padding:4vh 5vw 0}
+.bye .thanks{padding:0 0 4vh;text-align:right}
+.final{margin-top:4vh;position:relative}.final img{display:block;width:100%;max-height:100vh;object-fit:cover;object-position:center 30%;-webkit-mask-image:linear-gradient(transparent,#000 12%);mask-image:linear-gradient(transparent,#000 12%)}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.hero .scene{justify-self:center}.about,.split,.split.rev,.contact .split{grid-template-columns:1fr;direction:ltr}.split .side{flex-direction:row;align-items:flex-end;justify-content:space-between}.split.rev .side{flex-direction:row-reverse}.fig{max-width:150px}.contact .fig.end{grid-column:auto;justify-self:center}.about .side{flex-direction:row;justify-content:space-between;align-items:flex-end}.bye{flex-direction:column;align-items:center}.bye .thanks{text-align:center}}
+.tag.rt{display:block;width:max-content;margin:0 0 24px auto}.split .side.l{justify-content:flex-end}#lens .grid{max-width:none}.tag{background:url(images/me/torn.webp) center/100% 100% no-repeat;clip-path:none;padding:38px 84px;white-space:nowrap;font-size:2rem;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55));color:#1f1c1d}
+.banner .torn{position:relative;width:min(860px,100%);aspect-ratio:2.119;padding:0;background:url(images/me/torn.webp) center/100% 100% no-repeat;clip-path:none;filter:drop-shadow(0 22px 40px rgba(0,0,0,.65))}
+.banner .torn img{position:absolute;left:12%;top:19%;width:76%;height:62%;object-fit:cover;clip-path:polygon(0 4%,8% 0,22% 4%,38% 0,55% 4%,72% 0,90% 3%,100% 0,99% 45%,100% 96%,86% 100%,68% 96%,50% 100%,32% 96%,14% 100%,2% 96%,0 50%)}
+@media(max-width:860px){.tag{padding:26px 52px;font-size:1.5rem}}
+html,body{overflow-x:clip;max-width:100%}main,#portfolio,#lens,#logos{overflow-x:clip}button.ph{padding:0!important;background:#2a2627;border:0}button.ph img{position:absolute;inset:0}button.ph{position:relative}.banner-img{display:block;width:min(900px,100%);height:auto;filter:drop-shadow(0 22px 40px rgba(0,0,0,.6));animation:flt 8s ease-in-out infinite}
+.logo{background:none;width:54px;height:54px;border-radius:14px;animation:logoIn 1.1s cubic-bezier(.2,1.2,.3,1) both,logoLoop 6s 1.6s ease-in-out infinite;box-shadow:0 0 0 0 rgba(255,229,0,.5)}
+.logo img{display:block;width:100%;height:100%;object-fit:contain}
+.logo:hover{animation:logoSpin .9s ease both}
+@keyframes logoIn{from{transform:perspective(400px) rotateY(-540deg) scale(.2);opacity:0}to{transform:perspective(400px) rotateY(0) scale(1);opacity:1}}
+@keyframes logoLoop{0%,62%,100%{transform:perspective(400px) rotateY(0) scale(1);box-shadow:0 0 0 0 rgba(255,229,0,0)}70%{transform:perspective(400px) rotateY(180deg) scale(1.18);box-shadow:0 0 28px 6px rgba(255,229,0,.55)}80%{transform:perspective(400px) rotateY(360deg) scale(1.1);box-shadow:0 0 22px 4px rgba(255,229,0,.4)}88%{box-shadow:0 0 0 0 rgba(255,229,0,0)}}
+@keyframes logoSpin{to{transform:perspective(400px) rotateY(360deg) scale(1.2)}}
+.bgfx{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bgi{position:absolute;color:var(--y);opacity:.15;animation:drift var(--d) ease-in-out infinite alternate}
+.bgi svg{display:block;width:var(--s);height:var(--s);fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.bgi.wd{font-weight:800;font-size:var(--s);color:transparent;-webkit-text-stroke:1px var(--y);opacity:.2;white-space:nowrap}
+@keyframes drift{from{transform:translate(0,0) rotate(var(--r0))}to{transform:translate(var(--dx),var(--dy)) rotate(var(--r1))}}
+.scene{position:relative}
+.chip{position:absolute;width:58px;height:58px;border-radius:16px;background:var(--y);color:#1f1c1d;display:grid;place-items:center;box-shadow:0 12px 26px rgba(0,0,0,.45);animation:chipf 5s ease-in-out infinite alternate;animation-delay:var(--dl)}
+.chip svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@keyframes chipf{from{transform:translateY(0) rotate(-6deg)}to{transform:translateY(-16px) rotate(6deg)}}
+.hero-word{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-weight:800;font-size:clamp(4rem,12vw,9rem);color:transparent;-webkit-text-stroke:2px rgba(255,229,0,.35);z-index:0;white-space:nowrap;pointer-events:none}
+.hero-img{position:relative;z-index:1}.chip{z-index:2}
+.ticker{background:var(--y);color:#1f1c1d;overflow:hidden;white-space:nowrap;padding:16px 0;margin-top:6vh;font-weight:800;font-size:clamp(1.1rem,2.4vw,1.7rem);transform:rotate(-1.4deg);box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.ticker div{display:inline-block;animation:tick 28s linear infinite}
+.ticker span{margin:0 1.4rem}
+@keyframes tick{to{transform:translateX(-50%)}}
+#logos{background:var(--y);margin:8vh 0;padding:12vh 5vw;clip-path:polygon(0 3%,100% 0,100% 97%,0 100%)}
+#logos .tag{filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.tl{border-color:var(--y);box-shadow:0 0 0 4px rgba(255,229,0,.12),0 20px 40px rgba(0,0,0,.4)}
+.thanks{text-shadow:0 0 30px rgba(255,229,0,.4)}
+.contact .links a{background:rgba(255,229,0,.08)}
+@media(max-width:860px){.chip{width:44px;height:44px}.chip svg{width:22px;height:22px}}
+nav{box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.pgrid{columns:3 200px;column-gap:16px}
+.pi{display:block;width:100%;margin:0 0 16px;padding:0;border:2px solid rgba(255,229,0,.35);border-radius:16px;overflow:hidden;position:relative;break-inside:avoid;background:#2a2627;cursor:zoom-in;transition:transform .18s,border-color .2s,box-shadow .2s}
+.pi img{display:block;width:100%;height:auto}
+.pi span{position:absolute;left:10px;bottom:10px;background:var(--y);color:#1f1c1d;font:800 .8rem Montserrat,sans-serif;padding:5px 10px;border-radius:8px;opacity:0;transform:translateY(8px);transition:.25s}
+.pi:hover,.pi:focus-visible{border-color:var(--y);box-shadow:0 18px 40px rgba(255,229,0,.22)}.pi:hover span,.pi:focus-visible span{opacity:1;transform:none}
+.hero{position:relative;padding-right:calc(5vw + 96px)}
+.toolbox{position:absolute;right:1.6vw;top:50%;transform:translateY(-50%);width:92px;background:#2b2a2b;border:1px solid #444;border-radius:12px;padding:6px 8px 10px;box-shadow:0 24px 50px rgba(0,0,0,.6),0 0 0 3px rgba(255,229,0,.12);z-index:3;animation:tbf 6s ease-in-out infinite alternate}
+@keyframes tbf{from{transform:translateY(-50%) rotate(-2deg)}to{transform:translateY(calc(-50% - 12px)) rotate(2deg)}}
+.tgrip{display:flex;gap:4px;justify-content:center;padding:3px 0 8px}.tgrip i{width:22px;height:3px;background:#555;border-radius:2px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.tb{display:grid;place-items:center;height:36px;border:0;border-radius:6px;background:transparent;color:#cfcfcf;cursor:pointer;transition:background .15s,color .15s,transform .15s}
+.tb svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tb:hover{background:#444;color:#fff;transform:scale(1.12)}.tb.on{background:var(--y);color:#1f1c1d}
+.tfs{position:relative;height:40px;margin:10px 0 4px}
+.tf,.ts{position:absolute;width:22px;height:22px;border-radius:3px}.tf{left:14px;top:2px;background:var(--y);border:1px solid #000}.ts{left:30px;top:16px;background:#2b2a2b;border:5px solid #fff;width:20px;height:20px;box-sizing:border-box}
+.tname{font:600 .62rem Montserrat,sans-serif;color:#b9b4b0;text-align:center;min-height:2.2em;line-height:1.15}
+@media(max-width:860px){.hero{padding-right:5vw}.toolbox{position:static;transform:none;width:auto;margin:0 auto;order:3;animation:none}.tgrid{grid-template-columns:repeat(6,1fr)}.tgrip,.tfs{display:none}.tb{width:38px}}
+#portfolio .split{align-items:start}#portfolio .side{justify-content:flex-start;gap:24px;position:sticky;top:96px;align-self:start}@media(max-width:860px){#portfolio .side{position:static;justify-content:space-between}}
+#logos{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' preserveAspectRatio='none'%3E%3Cpath fill='%23f7ee45' d='M250 255L1000 60V640Q1000 720 930 745L0 1000V560Q10 380 250 255Z'/%3E%3C/svg%3E") center/100% 100% no-repeat;clip-path:none;margin:2vh 0 4vh;padding:24vh 5vw 22vh;position:relative}
+#logos .tag{margin:0 0 4vh 3vw}
+.lwrap{position:relative;max-width:1100px;margin:0 auto;aspect-ratio:1000/820;margin-top:-4vh}
+.lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.lgrid{position:absolute;left:0;right:0;top:12.2%;height:65.9%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr)}
+.lm{background:none;border:0;padding:0 14%;display:grid;place-items:center;cursor:zoom-in;transition:transform .25s}
+.lm img{width:100%;max-height:78%;object-fit:contain;filter:none;transition:transform .25s}
+.lm:hover img,.lm:focus-visible img{transform:scale(1.1) rotate(-1.5deg)}
+#lb img.ylw{background:#f7ee45;padding:6vw 8vw;box-shadow:0 0 0 2px var(--y)}
+@media(max-width:860px){#logos{background:#f7ee45;clip-path:polygon(0 2%,100% 0,100% 98%,0 100%);padding:14vh 5vw}.lines{display:none}.lwrap{aspect-ratio:auto;margin-top:0}.lgrid{position:static;height:auto;grid-template-columns:repeat(2,1fr);gap:8px}.lm{height:110px}}
+#contact{padding:10vh 5vw}
+.cwrap{display:grid;grid-template-columns:1fr 1.15fr;gap:5vw;max-width:1150px;margin:auto;align-items:start}
+.cinfo .tag{margin-bottom:26px}
+.cinfo h2{font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.1;font-weight:800}
+.cinfo p{color:var(--mut);margin:16px 0 26px;line-height:1.7;max-width:46ch}
+.clist{list-style:none;padding:0;display:grid;gap:12px}
+.clist li>a,.clist li>div{display:flex;align-items:center;gap:14px;text-decoration:none;padding:12px 16px;border:1px solid #3a3637;border-radius:14px;background:rgba(255,255,255,.03);transition:.2s}
+.clist li>a:hover{border-color:var(--y);transform:translateX(6px);background:rgba(255,229,0,.07)}
+.clist small{display:block;color:var(--mut);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.ci{width:42px;height:42px;border-radius:12px;background:var(--y);color:#1f1c1d;display:grid;place-items:center;flex:none}
+.ci svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cform{background:#272425;border:1px solid #3a3637;border-radius:22px;padding:clamp(22px,3.4vw,40px);box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 4px rgba(255,229,0,.08);display:grid;gap:16px}
+.cform h3{font-size:1.4rem;font-weight:800}.cform h3::after{content:"";display:block;width:46px;height:4px;background:var(--y);border-radius:2px;margin-top:8px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cform label{display:grid;gap:7px;font-size:.8rem;font-weight:600;color:#d8d3cf}
+.cform input,.cform select,.cform textarea{font:inherit;font-size:.95rem;color:#fff;background:#1d1a1b;border:1.5px solid #3f3b3c;border-radius:12px;padding:13px 14px;width:100%;transition:border-color .2s,box-shadow .2s}
+.cform textarea{resize:vertical;min-height:130px}
+.cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--y);box-shadow:0 0 0 4px rgba(255,229,0,.16)}
+.cform input:user-invalid,.cform textarea:user-invalid{border-color:#ff6b6b}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.send{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--y);color:#1f1c1d;border:0;border-radius:999px;padding:16px 28px;font:800 1rem Montserrat,sans-serif;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.send svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.send:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(255,229,0,.28)}.send:hover svg{transform:translate(4px,-4px)}
+.send:disabled{opacity:.7;cursor:progress;transform:none}
+.fstat{min-height:1.4em;font-size:.9rem;font-weight:600;color:var(--mut)}.fstat.ok{color:#7ee787}.fstat.err{color:#ff9b9b}.fstat a{color:var(--y)}
+@media(max-width:860px){.cwrap{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+.lm{padding:0 7%}.lm img{max-height:88%}#logos{padding-bottom:12vh}
+.hbanners{position:relative;z-index:2;padding:2vh 0 7vh;margin-top:-2vh}
+.hb{overflow:hidden;white-space:nowrap;font-weight:800;font-size:clamp(1.05rem,2.3vw,1.6rem);padding:15px 0;margin:-6px -3vw;box-shadow:0 14px 34px rgba(0,0,0,.5);animation:hbIn 1s cubic-bezier(.2,.9,.3,1) both}
+.hbt{display:inline-block;will-change:transform}
+.hb span{margin:0 1.2rem}.hb i{font-style:normal;margin:0 .4rem;opacity:.8}
+.hb.b1{background:var(--y);color:#1f1c1d;transform:rotate(-2.2deg);animation-delay:.2s}
+.hb.b1 .hbt{animation:hbL 38s linear infinite}
+.hb.b2{background:#111;color:var(--y);border-block:2px solid var(--y);transform:rotate(1.6deg);position:relative;z-index:1;animation-delay:.45s}
+.hb.b2 .hbt{animation:hbR 44s linear infinite}
+.hb.b3{background:#f3f0ec;color:#1f1c1d;transform:rotate(-1deg);animation-delay:.7s}
+.hb.b3 .hbt{animation:hbL 52s linear infinite}
+.hb.b3 span:nth-child(odd){font-family:Yellowtail,cursive;font-weight:400;font-size:1.25em}
+@keyframes hbL{to{transform:translateX(-50%)}}@keyframes hbR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes hbIn{from{opacity:0;translate:0 40px}to{opacity:1;translate:0 0}}
+.hb:hover .hbt{animation-play-state:paused}
+#lens .split{align-items:start}
+#lens .side.l{justify-content:flex-start;position:sticky;top:96px;align-self:start;margin-top:-6px}
+.pi{display:block;cursor:default;opacity:0;transition:scale .4s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .3s}
+.pi.in{animation:piIn .95s var(--rd) cubic-bezier(.2,.8,.2,1) both,bob 6.5s calc(var(--rd) + var(--bd) + .9s) ease-in-out infinite alternate}
+@keyframes piIn{from{opacity:0;transform:translateY(70px) rotateX(22deg) scale(.88)}to{opacity:1;transform:none}}
+@keyframes bob{from{translate:0 0}to{translate:0 -7px}}
+.pi img{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.pi:hover{scale:1.045;z-index:3;border-color:var(--y);box-shadow:0 24px 50px rgba(255,229,0,.28)}
+.pi:hover img{transform:scale(1.08)}
+.pi::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.pi:hover::after{transform:translateX(120%);transition:transform .9s}
+@media(max-width:860px){#lens .side.l{position:static}}
+.hb{margin:2px -3vw}.hbanners{padding-bottom:8vh}
+.hbg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+.hero>*:not(.hbg):not(.toolbox){position:relative;z-index:1}
+.hglow{position:absolute;width:44vw;height:44vw;border-radius:50%;filter:blur(70px);opacity:.22}
+.g1{background:radial-gradient(#ffe500,transparent 70%);left:-12vw;top:-8vw;animation:gl1 16s ease-in-out infinite alternate}
+.g2{background:radial-gradient(#ffb800,transparent 70%);right:-10vw;bottom:-14vw;animation:gl2 19s ease-in-out infinite alternate}
+@keyframes gl1{to{transform:translate(18vw,12vw) scale(1.25)}}@keyframes gl2{to{transform:translate(-16vw,-10vw) scale(.85)}}
+.hgrid{position:absolute;inset:-60px;background-image:linear-gradient(rgba(255,229,0,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,229,0,.07) 1px,transparent 1px);background-size:60px 60px;animation:gm 22s linear infinite}
+@keyframes gm{to{background-position:60px 60px}}
+.rul{position:absolute;background:repeating-linear-gradient(90deg,rgba(255,229,0,.4) 0 1px,transparent 1px 12px)}
+.rt{left:0;right:0;top:0;height:9px;animation:rt 5s linear infinite}.rl{left:0;top:0;bottom:0;width:9px;background:repeating-linear-gradient(0deg,rgba(255,229,0,.4) 0 1px,transparent 1px 12px);animation:rl 5s linear infinite}
+@keyframes rt{to{background-position-x:12px}}@keyframes rl{to{background-position-y:12px}}
+.hbg svg{position:absolute;inset:0;width:100%;height:100%}
+.dr{stroke-dasharray:2600;animation:draw 9s ease-in-out infinite}.d2{animation-delay:1.6s;stroke-dasharray:900}.d3{animation-delay:3s;stroke-dasharray:600}
+@keyframes draw{0%{stroke-dashoffset:2600;opacity:0}8%{opacity:.9}55%{stroke-dashoffset:0}85%{opacity:.9}100%{stroke-dashoffset:0;opacity:0}}
+.d2{--x:1}.anc{animation:anc 9s ease-in-out infinite}
+@keyframes anc{0%,25%{opacity:0}55%,85%{opacity:1}100%{opacity:0}}
+.spin{transform-origin:190px 570px;animation:sp 40s linear infinite}.reg{transform-origin:1090px 88px;animation:sp 24s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.selbox{position:absolute;left:42%;top:14%;width:170px;height:104px;border:1.5px dashed var(--y);opacity:.6;animation:sb 11s ease-in-out infinite alternate}
+.selbox i{position:absolute;width:8px;height:8px;background:#fff;border:1.5px solid var(--y)}
+@keyframes sb{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-90px,50px) scale(1.5,.9)}100%{transform:translate(60px,120px) scale(.9,1.3)}}
+.fan{position:absolute;left:4vw;bottom:9vh;width:0;height:0;opacity:.9}
+.fan b{position:absolute;left:-24px;bottom:0;width:48px;height:150px;border-radius:8px;border:1px solid rgba(255,255,255,.25);transform-origin:50% 100%;transform:rotate(0);animation:fn 6s cubic-bezier(.6,0,.3,1) infinite alternate;box-shadow:0 8px 18px rgba(0,0,0,.4)}
+@keyframes fn{from{transform:rotate(0)}to{transform:rotate(var(--a))}}
+.gl{position:absolute;font-weight:800;color:transparent;-webkit-text-stroke:1.5px rgba(255,229,0,.28)}
+.a1{font-size:11rem;left:34%;bottom:2%;animation:gf 14s ease-in-out infinite alternate}.a2{font-size:8rem;right:22%;top:3%;animation:gf 11s -3s ease-in-out infinite alternate}.a3{font-size:6rem;left:56%;bottom:6%;animation:gf 9s -5s ease-in-out infinite alternate}
+@keyframes gf{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-34px) rotate(10deg)}}
+@media(max-width:860px){.fan,.selbox{display:none}.a1{font-size:7rem}}
+.fan{left:30vw;bottom:7vh}@media(max-width:860px){.fan{display:none}}
+/* Services mosaic (layout from Untitled-2.pdf) */
+.svc{max-width:880px;margin:auto}
+.mosaic{position:relative;aspect-ratio:812/1480;container-type:inline-size;overflow:hidden;border-radius:14px;box-shadow:0 30px 60px rgba(0,0,0,.45);background:#111}
+.mt{position:absolute;overflow:hidden}
+.mt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.mt.ph-t:hover img{transform:scale(1.06)}
+.mt.grey{background:#dbdce0}.mt.grey img{object-fit:contain;padding:3%}
+.mt.tx{display:flex;flex-direction:column;justify-content:center;color:#fff}
+.mt h3{font-family:Montserrat,system-ui,sans-serif;font-weight:800;text-transform:uppercase;line-height:1.08;letter-spacing:.005em}
+.c-blue{background:#004fff;align-items:center;text-align:center}.c-blue h3{font-size:5.2cqw}
+.c-yel{background:#fffb10;color:#111}
+.pk{align-items:center;padding-top:1.2cqw}.pk h3{font-size:5.4cqw;color:#111;position:relative;z-index:1}
+.pk img{position:relative;inset:auto;flex:1;min-height:0;width:62%;height:auto;object-fit:contain;margin-top:.8cqw}
+.c-purple{background:#8844ff}
+.vt{align-items:center}.vt h3{font-size:4.5cqw;white-space:nowrap;transform:rotate(-90deg)}
+.c-sky{background:#46a2ff}
+.sg{padding-left:2.4cqw}.sg h3{font-size:4.5cqw}
+.band{display:block;background:#fffb10;color:#004fff;margin:.4cqw 0 .4cqw -2.4cqw;padding-left:2.4cqw}
+.c-violet{background:#6b00ee;padding-left:2.6cqw}.gf h3{font-size:4.2cqw}
+.pm{background:#55beff;align-items:center;text-align:center}.pm h3{font-size:5.4cqw;line-height:1.12}
+@media(max-width:600px){.mosaic{border-radius:10px}}
+</style></head><body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="bgfx" id="bgfx" aria-hidden="true"></div>
+<header class="top"><a class="logo" href="#top" aria-label="Home"><img src="images/me/logo.png" alt="SA logo"></a><b>Sreerag Ayyappath</b></header>
+<div id="top" class="hero">
+<div class="hbg" aria-hidden="true"><div class="hglow g1"></div><div class="hglow g2"></div><div class="hgrid"></div><div class="rul rt"></div><div class="rul rl"></div>
+<svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+<g fill="none" stroke="#ffe500" stroke-linecap="round">
+<path class="dr" d="M-20 520C200 300 380 700 620 450S1000 200 1240 380" stroke-width="2.2"/>
+<path class="dr d2" d="M820 110C960 40 1100 140 1040 250S880 300 820 110Z" stroke-width="1.8"/>
+<circle class="dr d3" cx="190" cy="570" r="92" stroke-width="1.8"/>
+<circle class="spin" cx="190" cy="570" r="116" stroke-width="1" stroke-dasharray="3 9" opacity=".5"/>
+<g class="anc" stroke-width="1.2" opacity=".75"><path d="M-20 520L200 300M620 450L380 700M620 450L860 200M1240 380L1000 200"/>
+<circle cx="200" cy="300" r="4"/><circle cx="380" cy="700" r="4"/><circle cx="860" cy="200" r="4"/><circle cx="1000" cy="200" r="4"/></g>
+<g class="anc" fill="#1f1c1d" stroke="#fff" stroke-width="1.4"><rect x="-25" y="515" width="10" height="10"/><rect x="615" y="445" width="10" height="10"/><rect x="1235" y="375" width="10" height="10"/></g>
+<g class="reg" stroke-width="1.5" opacity=".6"><circle cx="1090" cy="88" r="15"/><path d="M1090 66V110M1068 88H1112"/></g>
+<path d="M24 60V24H60M1140 24H1176V60M24 640V676H60M1140 676H1176V640" stroke-width="1.6" opacity=".45"/>
+</g></svg>
+<div class="selbox"><i style="left:-5px;top:-5px"></i><i style="left:calc(50% - 4px);top:-5px"></i><i style="right:-5px;top:-5px"></i><i style="left:-5px;top:calc(50% - 4px)"></i><i style="right:-5px;top:calc(50% - 4px)"></i><i style="left:-5px;bottom:-5px"></i><i style="left:calc(50% - 4px);bottom:-5px"></i><i style="right:-5px;bottom:-5px"></i></div>
+<div class="fan"><b style="--a:-48deg;background:#2a2627"></b><b style="--a:-28deg;background:#e9e6e3"></b><b style="--a:-9deg;background:#fff"></b><b style="--a:10deg;background:#ffb800"></b><b style="--a:29deg;background:#ffe500"></b><b style="--a:48deg;background:#111"></b></div>
+<span class="gl a1">Aa</span><span class="gl a2">&amp;</span><span class="gl a3">#</span></div>
+<aside class="toolbox" aria-label="Design toolbox"><div class="tgrip"><i></i><i></i><i></i></div><div class="tgrid"><button class="tb on" data-n="Selection Tool (V)" aria-label="Selection Tool"><svg viewBox="0 0 24 24"><path d="M6 3l12 8.5-5.5 1.2L9.5 19z" fill="currentColor"/></svg></button><button class="tb" data-n="Direct Selection Tool (A)" aria-label="Direct Selection Tool"><svg viewBox="0 0 24 24"><path d="M6 3l12 8.5-5.5 1.2L9.5 19z"/></svg></button><button class="tb" data-n="Pen Tool (P)" aria-label="Pen Tool"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></button><button class="tb" data-n="Type Tool (T)" aria-label="Type Tool"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></button><button class="tb" data-n="Line Segment Tool (\)" aria-label="Line Segment Tool"><svg viewBox="0 0 24 24"><path d="M5 19L19 5"/></svg></button><button class="tb" data-n="Rectangle Tool (M)" aria-label="Rectangle Tool"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="1"/></svg></button><button class="tb" data-n="Paintbrush Tool (B)" aria-label="Paintbrush Tool"><svg viewBox="0 0 24 24"><path d="M18 3l3 3-9 9-3-3z"/><path d="M9 12c-3 0-4 2-4 4s-1 3-2 4c3 1 7 0 7-4"/></svg></button><button class="tb" data-n="Rotate Tool (R)" aria-label="Rotate Tool"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button><button class="tb" data-n="Scale Tool (S)" aria-label="Scale Tool"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="10" height="10"/><path d="M13 11l8-8M15 3h6v6"/></svg></button><button class="tb" data-n="Eyedropper Tool (I)" aria-label="Eyedropper Tool"><svg viewBox="0 0 24 24"><path d="M20 4a2.8 2.8 0 0 0-4 0l-2 2-1-1-2 2 1 1-8 8v3h3l8-8 1 1 2-2-1-1 2-2a2.8 2.8 0 0 0 0-4z"/></svg></button><button class="tb" data-n="Gradient Tool (G)" aria-label="Gradient Tool"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 19L19 8M12 19l7-7M16 19l3-3"/></svg></button><button class="tb" data-n="Zoom Tool (Z)" aria-label="Zoom Tool"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M21 21l-5-5M11 8v6M8 11h6"/></svg></button></div><div class="tfs"><span class="tf"></span><span class="ts"></span></div><div class="tname" id="tname">Selection Tool (V)</div></aside>
+ <div><h1><span>Design.</span><span class="c">Create.</span><span>Inspire.</span></h1><p>Good ideas. Better design.</p><a class="cta" href="#portfolio">View my work</a></div>
+ <div class="scene"><div class="hero-word" aria-hidden="true">DESIGN</div><span class="chip" data-i="pen" style="left:2%;top:8%;--dl:0s"></span><span class="chip" data-i="palette" style="right:0;top:22%;--dl:-1.2s"></span><span class="chip" data-i="camera" style="left:0;bottom:22%;--dl:-2.4s"></span><span class="chip" data-i="type" style="right:6%;bottom:4%;--dl:-3.6s"></span><img class="hero-img" src="images/me/me-02.webp" alt="Sreerag Ayyappath working on a laptop with headphones"></div>
+</div>
+<nav aria-label="Main"><a href="#about">About</a><a href="#services">What I Create</a><a href="#portfolio">Portfolio</a><a href="#lens">Through the lens</a><a href="#logos">Logos</a><a href="#contact">Contact</a><a href="https://www.instagram.com/metaai.art" target="_blank" rel="noopener">Instagram</a></nav>
+<main>
+<div class="banner"><img class="banner-img" src="images/me/banner.webp" alt="Sreerag Ayyappath at his designer desk, Ideas to Impact"></div>
+<div class="ticker" aria-hidden="true"><div><span>Branding</span><span>✦</span><span>Logo Design</span><span>✦</span><span>Packaging</span><span>✦</span><span>Print Design</span><span>✦</span><span>Typography</span><span>✦</span><span>Photography</span><span>✦</span><span>AI Mockups</span><span>✦</span><span>Pre-press</span><span>✦</span><span>Creative Direction</span><span>✦</span><span>Visual Identity</span><span>✦</span><span>Branding</span><span>✦</span><span>Logo Design</span><span>✦</span><span>Packaging</span><span>✦</span><span>Print Design</span><span>✦</span><span>Typography</span><span>✦</span><span>Photography</span><span>✦</span><span>AI Mockups</span><span>✦</span><span>Pre-press</span><span>✦</span><span>Creative Direction</span><span>✦</span><span>Visual Identity</span><span>✦</span></div></div>
+<section id="about"><div class="about"><div class="tlw"><div class="tl">
+  <div><small>2016 – now</small><p><strong>Designer, corporate gifts branding</strong>Smartprinty Advertising, Dubai</p></div>
+  <div><small>2014 – 2016</small><p><strong>Graphic designer</strong>DC Infotec, Kerala, India</p></div>
+  <div><small>2013 – 2014</small><p><strong>Web and graphic design</strong>Freelance</p></div>
+  <div><small>2011 – 2014</small><p><strong>B.Sc Multimedia</strong>Annamalai University · Image Creative Education, Thrissur</p></div></div></div><div class="side"><div class="tag">About</div><img class="fig" src="images/me/me-05.webp" alt="Sreerag sketching on a drawing tablet"></div></div><p class="bio">I lead design end to end: concept, layout, pre-press and coordination with printers. I work in print media, promotional branding and advertising collateral, and use AI tools for mockups and visual exploration. Currently designing at Smartprinty Advertising, Dubai.</p></section>
+<section id="services" aria-labelledby="svc-t"><div class="svc"><div class="tag" id="svc-t">What I Create</div><div class="mosaic" role="group" aria-label="Design services with sample work">
+<div class="mt ph-t" style="left:0.000%;top:0.000%;width:52.340%;height:19.054%"><img loading="lazy" src="images/services/fabo.webp" alt="FABO Dubai sportswear branding: printed jersey, shopping bag and cards"></div>
+<div class="mt tx c-blue" style="left:52.340%;top:0.000%;width:47.660%;height:19.054%"><h3>Customized<br>Printing</h3></div>
+<div class="mt tx c-yel pk" style="left:0.000%;top:19.054%;width:49.015%;height:13.041%"><h3>Packaging</h3><img loading="lazy" src="images/services/burger.webp" alt="Contenair Cafe printed burger box, closed and open"></div>
+<div class="mt ph-t" style="left:0.000%;top:32.095%;width:49.015%;height:14.324%"><img loading="lazy" src="images/services/scent.webp" alt="Scent of Soul luxury perfume packaging in black and magenta"></div>
+<div class="mt ph-t" style="left:49.015%;top:19.054%;width:33.128%;height:27.365%"><img loading="lazy" src="images/services/food.webp" alt="Good Food, Good Mood social media poster with a plated meal"></div>
+<div class="mt tx c-purple vt" style="left:82.143%;top:19.054%;width:17.857%;height:27.365%"><h3>Social Media</h3></div>
+<div class="mt tx c-sky sg" style="left:0.000%;top:46.419%;width:32.882%;height:21.689%"><h3>Indoor<span class="band">Outdoor</span>Signage</h3></div>
+<div class="mt ph-t" style="left:32.882%;top:46.419%;width:34.113%;height:21.689%"><img loading="lazy" src="images/services/sign-board.webp" alt="Response roadside billboard with running shoes artwork"></div>
+<div class="mt ph-t" style="left:66.995%;top:46.419%;width:33.005%;height:21.689%"><img loading="lazy" src="images/services/sign-shop.webp" alt="Response sportswear store facade with black and yellow signage"></div>
+<div class="mt ph-t" style="left:0.000%;top:68.108%;width:19.335%;height:14.392%"><img loading="lazy" src="images/services/airtel.webp" alt="Airtel branded notebook, mug, power bank and USB drive"></div>
+<div class="mt ph-t grey" style="left:19.335%;top:68.108%;width:42.857%;height:14.392%"><img loading="lazy" src="images/services/giftset.webp" alt="Corporate gift set with notebook, pen and keychain in a black box"></div>
+<div class="mt tx c-violet gf" style="left:62.192%;top:68.108%;width:37.808%;height:14.392%"><h3>Corporate<br>Gifts<br>Branding</h3></div>
+<div class="mt tx c-sky pm" style="left:0.000%;top:82.500%;width:36.946%;height:17.500%"><h3>Print<br>Media</h3></div>
+<div class="mt ph-t" style="left:36.946%;top:82.500%;width:22.906%;height:17.500%"><img loading="lazy" src="images/services/gree.webp" alt="GREE brochures, cover and inside spread"></div>
+<div class="mt ph-t" style="left:59.852%;top:82.500%;width:40.148%;height:17.500%"><img loading="lazy" src="images/services/deye.webp" alt="Deye and Longi solar brochure stack"></div>
+</div></div></section>
+<section id="portfolio"><div class="split"><div class="side l"><div class="tag">Portfolio</div><img class="fig" src="images/me/me-01.webp" alt="Sreerag at his desk"></div><div class="main"><div class="pgrid" id="pgrid"></div></div></div></section>
+<section id="lens"><div class="split"><div class="side l"><img class="fig" src="images/me/me-03.webp" alt="Sreerag holding a Sony camera"></div><div class="main"><div class="tag rt">Captured Moments…</div><div class="grid" id="grid"></div>
+ <div class="arrows"><button id="gp" aria-label="Previous photos">‹</button><button id="gn" aria-label="Next photos">›</button></div></div></div></section>
+<section id="logos"><div class="tag">Logo Marks</div><div class="lwrap"><svg class="lines" viewBox="0 -100 1000 820" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="#111" stroke-width="1.6" vector-effect="non-scaling-stroke">
+<path vector-effect="non-scaling-stroke" d="M20 10H226Q250 10 250 34V156Q250 180 274 180H476Q500 180 500 204V336Q500 360 524 360H726Q750 360 750 384V506Q750 530 774 530H900"/>
+<path vector-effect="non-scaling-stroke" d="M357 -90H476Q500 -90 500 -66V-12Q500 12 524 12H726Q750 12 750 36V156Q750 180 774 180H976Q1000 180 1000 204V336Q1000 360 1024 360H1060"/>
+<path vector-effect="non-scaling-stroke" d="M125 360H226Q250 360 250 384V506Q250 530 274 530H476Q500 530 500 554V676Q500 700 524 700H690"/></g></svg><div class="lgrid"><button class="lm" data-s="images/logos/lm01.webp" data-t="Al Arabi Tours & Travels" aria-label="Open logo: Al Arabi Tours & Travels"><img loading="lazy" src="images/logos/lm01.webp" alt="Al Arabi Tours & Travels logo"></button><button class="lm" data-s="images/logos/lm02.webp" data-t="Tanford Freight" aria-label="Open logo: Tanford Freight"><img loading="lazy" src="images/logos/lm02.webp" alt="Tanford Freight logo"></button><button class="lm" data-s="images/logos/lm03.webp" data-t="Riddles Readymade Garments" aria-label="Open logo: Riddles Readymade Garments"><img loading="lazy" src="images/logos/lm03.webp" alt="Riddles Readymade Garments logo"></button><button class="lm" data-s="images/logos/lm04.webp" data-t="Fab Care Laundry" aria-label="Open logo: Fab Care Laundry"><img loading="lazy" src="images/logos/lm04.webp" alt="Fab Care Laundry logo"></button><button class="lm" data-s="images/logos/lm05.webp" data-t="Global Engineering Trading" aria-label="Open logo: Global Engineering Trading"><img loading="lazy" src="images/logos/lm05.webp" alt="Global Engineering Trading logo"></button><button class="lm" data-s="images/logos/lm06.webp" data-t="Mamba Ventures" aria-label="Open logo: Mamba Ventures"><img loading="lazy" src="images/logos/lm06.webp" alt="Mamba Ventures logo"></button><button class="lm" data-s="images/logos/lm07.webp" data-t="Nexus Properties" aria-label="Open logo: Nexus Properties"><img loading="lazy" src="images/logos/lm07.webp" alt="Nexus Properties logo"></button><button class="lm" data-s="images/logos/lm08.webp" data-t="Anath Oil & Gas" aria-label="Open logo: Anath Oil & Gas"><img loading="lazy" src="images/logos/lm08.webp" alt="Anath Oil & Gas logo"></button><button class="lm" data-s="images/logos/lm12.webp" data-t="Touba Impex SARL" aria-label="Open logo: Touba Impex SARL"><img loading="lazy" src="images/logos/lm12.webp" alt="Touba Impex SARL logo"></button><button class="lm" data-s="images/logos/lm11.webp" data-t="Wellset Transport Passengers" aria-label="Open logo: Wellset Transport Passengers"><img loading="lazy" src="images/logos/lm11.webp" alt="Wellset Transport Passengers logo"></button><button class="lm" data-s="images/logos/lm10.webp" data-t="Zee.K Tea" aria-label="Open logo: Zee.K Tea"><img loading="lazy" src="images/logos/lm10.webp" alt="Zee.K Tea logo"></button><button class="lm" data-s="images/logos/lm09.webp" data-t="Food Hut" aria-label="Open logo: Food Hut"><img loading="lazy" src="images/logos/lm09.webp" alt="Food Hut logo"></button></div></div></section>
+<section id="contact"><div class="cwrap"><div class="cinfo"><div class="tag">Contact</div><h2>Let's create something great together.</h2><p>Have a logo, packaging or print project in mind? Send me the details and I'll reply within one working day.</p><ul class="clist"><li><a href="https://wa.me/971588338975" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><path d="M3 21l1.6-4.6A8.5 8.5 0 1 1 8 19.6z"/><path d="M9 9.5c0 3 2.5 5.500 5.500 5.500l1.2-1.500-2-1-1 .7a4 4 0 0 1-1.900-1.900l.7-1-1-2z"/></svg></span><span><small>WhatsApp</small>+971 58 833 8975</span></a></li><li><a href="mailto:sreeraganair@gmail.com"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><small>Email</small>sreeraganair@gmail.com</span></a></li><li><a href="https://www.linkedin.com/in/sreeraganair" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-7M12 13a3 3 0 0 1 6 0v4"/></svg></span><span><small>LinkedIn</small>/in/sreeraganair</span></a></li><li><a href="https://www.instagram.com/metaai.art" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.500" cy="6.500" r=".6"/></svg></span><span><small>Instagram</small>@metaai.art</span></a></li><li><div><span class="ci"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.200 7-11.500A7 7 0 0 0 5 9.500C5 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg></span><span><small>Based in</small>Dubai, UAE</span></div></li></ul></div><form class="cform" id="cform" action="send.php" method="post" novalidate>
+<h3>Send a message</h3>
+<div class="row2"><label>Full name *<input name="name" type="text" autocomplete="name" required maxlength="80"></label><label>Email *<input name="email" type="email" autocomplete="email" required maxlength="120"></label></div>
+<div class="row2"><label>Phone / WhatsApp<input name="phone" type="tel" autocomplete="tel" maxlength="30"></label><label>I need help with<select name="service"><option>Logo &amp; Branding</option><option>Packaging Design</option><option>Print &amp; Marketing Collateral</option><option>Corporate Gifts Branding</option><option>Photography</option><option>AI Mockups &amp; Visuals</option><option>Something else</option></select></label></div>
+<label>Project details *<textarea name="message" rows="5" required minlength="10" maxlength="3000" placeholder="Tell me about your project, timeline and budget"></textarea></label>
+<div class="hp" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+<input type="hidden" name="elapsed" id="elapsed" value="0">
+<button class="send" type="submit"><span>Send message</span><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+<p class="fstat" id="fstat" role="status" aria-live="polite"></p>
+</form></div></section>
+</main>
+<div id="lb" role="dialog" aria-label="Image viewer"><div><img id="lbi" alt=""><p id="lbt"></p></div></div>
+<div class="bye"><img class="fig" src="images/me/me-04.webp" alt="Sreerag relaxing with a Work Smart Not Hard mug"><div class="thanks">Thank You</div></div>
+<footer>Sreerag Ayyappath · Graphic Designer, Dubai, UAE · MetaAiArt · © 2026</footer>
+<script>
+const cols=['#ffe500','#ffffff','#ffb800','#e9e6e3','#ffd23f'];
+const works=[["images/works/work01.jpg", "Al Taj Fragrance Box", 1305, 800], ["images/works/work02.jpg", "Fragrance Box", 1400, 625], ["images/works/work03.jpg", "Luxury Perfume Gift Set", 1400, 933], ["images/works/work04.jpg", "Al Taj Fragrance", 900, 581], ["images/works/work05.jpg", "Business Card I", 900, 673], ["images/works/work06.jpg", "Business Card II", 900, 742], ["images/works/work07.jpg", "Business Card III", 900, 742], ["images/works/work08.jpg", "Deye Billboard, Djibouti", 1400, 621], ["images/works/work09.jpg", "Billboard Design", 868, 1000], ["images/works/work10.jpg", "Brand Collateral", 900, 701], ["images/works/work11.jpg", "Deye Brochure", 1400, 1050], ["images/works/work12.jpg", "Double Design", 772, 1000], ["images/works/work13.jpg", "Foody Restaurant", 1273, 832], ["images/works/work14.jpg", "Golden Branding", 900, 635], ["images/works/work15.jpg", "Gree Brochure", 1248, 1400], ["images/works/work16.jpg", "Lightbox Signage", 900, 600], ["images/works/work17.jpg", "Mousepad Branding", 900, 681], ["images/works/work18.jpg", "Mumtaz Branding I", 895, 1000], ["images/works/work19.jpg", "Mumtaz Branding II", 900, 997], ["images/works/work20.jpg", "Riddles", 900, 510], ["images/works/work21.jpg", "Stadiz", 707, 1000], ["images/works/work22.jpg", "Storefront Signage", 842, 1000], ["images/works/work23.jpg", "Tredecim", 900, 997], ["images/works/work24.jpg", "Zawj Design", 900, 948]];
+const pg_=document.getElementById('pgrid');
+works.forEach((w,i)=>{const d=document.createElement('div');d.className='pi';d.style.setProperty('--rd',((i%3)*.14+Math.floor(i/3)*.04)+'s');d.style.setProperty('--bd',(i*.53%3)+'s');
+d.innerHTML='<img loading="lazy" width="'+w[2]+'" height="'+w[3]+'" alt="'+w[1]+'" src="'+w[0]+'"><span>'+w[1]+'</span>';pg_.appendChild(d)});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.pi').forEach(el=>io.observe(el));
+const grid=document.getElementById('grid');let pg=0;const P_=["images/photos/photo01.jpg", "images/photos/photo02.jpg", "images/photos/photo03.jpg", "images/photos/photo04.jpg", "images/photos/photo05.jpg", "images/photos/photo06.jpg", "images/photos/photo07.jpg", "images/photos/photo08.jpg", "images/photos/photo09.jpg", "images/photos/photo10.jpg", "images/photos/photo11.jpg", "images/photos/photo12.jpg", "images/photos/photo13.jpg", "images/photos/photo14.jpg", "images/photos/photo15.jpg"],per=9,total=P_.length,pages=Math.ceil(total/per);
+function photos(){grid.innerHTML='';for(let i=0;i<per;i++){const k=pg*per+i;if(k>=total)break;const d=document.createElement('button');d.className='ph';d.setAttribute('aria-label','Open photo '+(k+1));d.style.animationDelay=i*70+'ms';d.innerHTML='<img loading="lazy" alt="Photograph '+(k+1)+'" src="'+P_[k]+'">';d.onclick=()=>show(P_[k],'Photograph '+(k+1));
+d.onmousemove=e=>{const r=d.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;d.style.transform=`rotateY(${x*20}deg) rotateX(${-y*20}deg) scale(1.05)`};d.onmouseleave=()=>d.style.transform='';grid.appendChild(d)}}
+gn.onclick=()=>{pg=(pg+1)%pages;photos()};gp.onclick=()=>{pg=(pg+pages-1)%pages;photos()};photos();
+function show(s,t,y){lbi.src=s;lbi.alt=t;lbi.className=y?'ylw':'';lbt.textContent=t;lb.classList.add('on')}
+document.querySelectorAll('.lm').forEach(b=>{b.onclick=()=>show(b.dataset.s,b.dataset.t,1)});
+lb.onclick=()=>lb.classList.remove('on');addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+document.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById('tname').textContent=b.dataset.n});
+
+const t0=Date.now(),cf=document.getElementById('cform'),fs=document.getElementById('fstat');
+cf.addEventListener('submit',async e=>{e.preventDefault();
+ if(!cf.checkValidity()){cf.reportValidity();return}
+ document.getElementById('elapsed').value=Math.round((Date.now()-t0)/1000);
+ const btn=cf.querySelector('.send');btn.disabled=true;btn.classList.add('busy');fs.className='fstat';fs.textContent='Sending…';
+ try{const r=await fetch(cf.action,{method:'POST',body:new FormData(cf),headers:{Accept:'application/json'}});
+  const j=await r.json();if(!r.ok||!j.ok)throw new Error(j.message||'Error');
+  fs.className='fstat ok';fs.textContent=j.message;cf.reset()}
+ catch(err){fs.className='fstat err';fs.innerHTML='Sorry, the message could not be sent'+(err.message&&err.message!=='Error'&&!/JSON|fetch|Unexpected/i.test(err.message)?' ('+err.message+')':'')+'. Please email <a href="mailto:sreeraganair@gmail.com">sreeraganair@gmail.com</a> or use WhatsApp.'}
+ btn.disabled=false;btn.classList.remove('busy')});
+const IC={"pen": "<path d=\"M12 19l7-7 3 3-7 7-3-3z\"/><path d=\"M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z\"/><path d=\"M2 2l7.6 7.6\"/><circle cx=\"11\" cy=\"11\" r=\"2\"/>", "palette": "<circle cx=\"13.5\" cy=\"6.5\" r=\".6\"/><circle cx=\"17.5\" cy=\"10.5\" r=\".6\"/><circle cx=\"8.5\" cy=\"7.5\" r=\".6\"/><circle cx=\"6.5\" cy=\"12.5\" r=\".6\"/><path d=\"M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1a1.6 1.6 0 0 1 1.7-1.7H17c3 0 5.5-2.5 5.5-5.5C22 6 17.5 2 12 2z\"/>", "camera": "<path d=\"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z\"/><circle cx=\"12\" cy=\"13\" r=\"4\"/>", "code": "<path d=\"M16 18l6-6-6-6M8 6l-6 6 6 6\"/>", "layers": "<path d=\"M12 2L2 7l10 5 10-5-10-5z\"/><path d=\"M2 17l10 5 10-5M2 12l10 5 10-5\"/>", "crop": "<path d=\"M6 2v14a2 2 0 0 0 2 2h14M2 6h14a2 2 0 0 1 2 2v14\"/>", "type": "<path d=\"M4 7V4h16v3M9 20h6M12 4v16\"/>", "bezier": "<path d=\"M3 20C8 20 6 4 12 4s4 16 9 16\"/><circle cx=\"3\" cy=\"20\" r=\"1.6\"/><circle cx=\"21\" cy=\"20\" r=\"1.6\"/><circle cx=\"12\" cy=\"4\" r=\"1.6\"/>", "pointer": "<path d=\"M3 3l7 17 2.5-7.5L20 10 3 3z\"/>", "spark": "<path d=\"M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2z\"/>"};
+document.querySelectorAll('.chip').forEach(c=>c.innerHTML='<svg viewBox="0 0 24 24">'+IC[c.dataset.i]+'</svg>');
+(function(){const f=document.getElementById('bgfx'),keys=Object.keys(IC),W=['Branding','Logo','Type','Print','Packaging','Layout','Colour','Concept','Identity','Mockup'];let k=0;
+const rnd=(a,b)=>a+Math.random()*(b-a);
+for(let n=0;n<26;n++){const d=document.createElement('div'),w=n%3===2;d.className='bgi'+(w?' wd':'');
+d.style.left=rnd(0,94)+'%';d.style.top=rnd(0,92)+'%';d.style.setProperty('--d',rnd(9,18)+'s');d.style.setProperty('--dx',rnd(-60,60)+'px');d.style.setProperty('--dy',rnd(-80,80)+'px');d.style.setProperty('--r0',rnd(-15,15)+'deg');d.style.setProperty('--r1',rnd(-35,35)+'deg');
+if(w){d.style.setProperty('--s',rnd(1.6,3.4)+'rem');d.textContent=W[k++%W.length]}else{d.style.setProperty('--s',rnd(34,72)+'px');d.innerHTML='<svg viewBox="0 0 24 24">'+IC[keys[n%keys.length]]+'</svg>'}
+f.appendChild(d)}})();
+const cv=document.getElementById('bg'),cx=cv.getContext('2d');let W,H,P=[];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=Array.from({length:Math.min(70,W/18|0)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.5+1,vx:(Math.random()-.5)*.4,vy:-Math.random()*.5-.1}))}
+rs();addEventListener('resize',rs);
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function fr(){cx.clearRect(0,0,W,H);P.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=H+10;p.x=Math.random()*W}cx.fillStyle='rgba(255,229,0,.55)';cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill();for(let j=i+1;j<P.length;j++){const q=P[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<110){cx.strokeStyle='rgba(255,229,0,'+(.14*(1-d/110))+')';cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}});if(!still)requestAnimationFrame(fr)}
+fr();
+</script></body></html>
